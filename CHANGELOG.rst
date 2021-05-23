@@ -9,9 +9,13 @@ and this project adheres to `Semantic Versioning <http://semver.org/spec/v2.0.0.
 --------------------------
 Added
 +++++
-  - Support for Django 2.1 & 2.2
+  - Support for Django 2.1, 2.2, 3.0, 3.1 and 3.2
   - Added tox.ini targets
 
+Changed
++++++++
+  - Move CI/CD to GitHub Actions
+  - Refactor tests to use pytest and follow DRY
 
 `v0.4.5`_ - 25-June-2018
 --------------------------

@@ -355,18 +355,14 @@ class Env:
     @classmethod
     def db_url_config(cls, url, engine=None):
         """Pulled from DJ-Database-URL, parse an arbitrary Database URL.
-        Support currently exists for PostgreSQL, PostGIS, MySQL, Oracle and SQLite.
 
-        SQLite connects to file based databases. The same URL format is used, omitting the hostname,
-        and using the "file" portion as the filename of the database.
-        This has the effect of four slashes being present for an absolute file path:
+        Support currently exists for PostgreSQL, PostGIS, MySQL, Oracle and
+        SQLite.
 
-        >>> from environ import Env
-        >>> Env.db_url_config('sqlite:////full/path/to/your/file.sqlite')
-        {'ENGINE': 'django.db.backends.sqlite3', 'HOST': '', 'NAME': '/full/path/to/your/file.sqlite', 'PASSWORD': '', 'PORT': '', 'USER': ''}
-        >>> Env.db_url_config('postgres://uf07k1i6d8ia0v:wegauwhgeuioweg@ec2-107-21-253-135.compute-1.amazonaws.com:5431/d8r82722r2kuvn')
-        {'ENGINE': 'django.db.backends.postgresql', 'HOST': 'ec2-107-21-253-135.compute-1.amazonaws.com', 'NAME': 'd8r82722r2kuvn', 'PASSWORD': 'wegauwhgeuioweg', 'PORT': 5431, 'USER': 'uf07k1i6d8ia0v'}
-
+        SQLite connects to file based databases. The same URL format is used,
+        omitting the hostname, and using the "file" portion as the filename of
+        the database. This has the effect of four slashes being present for an
+        absolute file path.
         """
         if not isinstance(url, cls.URL_CLASS):
             if url == 'sqlite://:memory:':
@@ -673,29 +669,7 @@ class Env:
 
 class Path:
 
-    """Inspired to Django Two-scoops, handling File Paths in Settings.
-
-        >>> from environ import Path
-        >>> root = Path('/home')
-        >>> root, root(), root('dev')
-        (<Path:/home>, '/home', '/home/dev')
-        >>> root == Path('/home')
-        True
-        >>> root in Path('/'), root not in Path('/other/path')
-        (True, True)
-        >>> root('dev', 'not_existing_dir', required=True)
-        Traceback (most recent call last):
-        environ.environ.ImproperlyConfigured: Create required path: /home/not_existing_dir
-        >>> public = root.path('public')
-        >>> public, public.root, public('styles')
-        (<Path:/home/public>, '/home/public', '/home/public/styles')
-        >>> assets, scripts = public.path('assets'), public.path('assets', 'scripts')
-        >>> assets.root, scripts.root
-        ('/home/public/assets', '/home/public/assets/scripts')
-        >>> assets + 'styles', str(assets + 'styles'), ~assets
-        (<Path:/home/public/assets/styles>, '/home/public/assets/styles', <Path:/home/public>)
-
-    """
+    """Inspired to Django Two-scoops, handling File Paths in Settings."""
 
     def path(self, *paths, **kwargs):
         """Create new Path based on self.root and provided paths.
