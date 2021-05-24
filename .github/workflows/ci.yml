@@ -23,6 +23,19 @@ on:
       - master
       - 'v[0-9]+.[0-9]+.x'
 
+  schedule:
+    - cron: '0 11 * * *'
+      #      | | | | |
+      #      | | | | |____ day of the week (0 - 6 or SUN-SAT)
+      #      | | | |____ month (1 - 12 or JAN-DEC)
+      #      | | |____ day of the month (1 - 31)
+      #      | |____ hour (0 - 23)
+      #      |____ minute (0 - 59)
+
+
+env:
+  PYTHONUNBUFFERED: '1'
+
 defaults:
   run:
     shell: bash
@@ -67,7 +80,13 @@ jobs:
           python -m pip install --upgrade pip
           pip --use-feature=in-tree-build install tox tox-gh-actions
 
-      - name: Test with tox
+      - name: Setuptools self-test
+        run: |
+          python setup.py --fullname
+          python setup.py --long-description
+          python setup.py --classifiers
+
+      - name: Run unit tests with coverage
         run: tox
 
       - name: Upload coverage report
