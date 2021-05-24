@@ -40,5 +40,5 @@ jobs:
           python -m pip install --upgrade pip
           pip --use-feature=in-tree-build install tox tox-gh-actions
 
-      - name: Lint with tox
+      - name: Code linting
         run: tox -e lint

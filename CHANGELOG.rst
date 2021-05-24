@@ -1,146 +1,260 @@
 Changelog
 =========
-All notable changes to this project will be documented in this file.
 
-The format is *inspired* by `Keep a Changelog <http://keepachangelog.com/en/1.0.0/>`_
-and this project adheres to `Semantic Versioning <http://semver.org/spec/v2.0.0.html>`_.
-
-`unreleased`_
---------------------------
-Added
-+++++
-  - Support for Django 2.1, 2.2, 3.0, 3.1 and 3.2
-  - Added tox.ini targets
-
-Changed
-+++++++
-  - Move CI/CD to GitHub Actions
-  - Refactor tests to use pytest and follow DRY
-
-Fixed
-+++++
-  - Fixed various code linting errors added this check to CI
+This file contains a brief summary of new features and dependency changes or
+releases, in reverse chronological order.
 
 
-`v0.4.5`_ - 25-June-2018
---------------------------
-Added
-+++++
-  - Support for Django 2.0
-  - Support for smart casting
-  - Support PostgreSQL unix domain socket paths
-  - Tip: Multiple env files
+2.0.0 (2021-XX-XX)
+------------------
 
-Changed
-+++++++
-  - Fix parsing option values None, True and False
-  - Order of importance of engine configuration in db_url_config
+Breaking Changes
+^^^^^^^^^^^^^^^^
 
-Removed
-+++++++
-  - Remove django and six dependencies
+* Renaming PyPI package from ``django-environ`` to ``django-environ-2`` due to
+  the fork. Now package lives at `<https://pypi.org/project/django-environ-2>`_.
+* Python < 3.6 is no longer supported.
+* Django < 1.11 is no longer supported.
+* Removed no longer used ``environ.VERSION``. Use ``environ.__version__`` instead.
 
 
-`v0.4.4`_ - 21-August-2017
---------------------------
+Features
+^^^^^^^^
 
-Added
-+++++
-  - Support for django-redis multiple locations (master/slave, shards)
-  - Support for Elasticsearch2
-  - Support for Mysql-connector
-  - Support for pyodbc
-  - Add __contains__ feature to Environ class
-
-Changed
-+++++++
-  - Fix Path subtracting
+* Added support for Django 2.1, 2.2, 3.0, 3.1 and 3.2.
+* Added option to disable ``smart_cast``.
+* Added support for ``rediss://`` cache URLs.
+* Added secure redis backend and Django 1.11 db config.
 
 
-`v0.4.3`_ - 21-August-2017
---------------------------
-Changed
-+++++++
-  - Rollback the default Environ to os.environ
+Improvements
+^^^^^^^^^^^^
 
-`v0.4.2`_ - 13-April-2017
--------------------------
-Added
-+++++
-  - Confirm support for Django 1.11.
-  - Support for Redshift database URL
-
-Changed
-+++++++
-  - Fix uwsgi settings reload problem (#55)
-  - Update support for django-redis urls (#109)
-
-`v0.4.1`_ - 13-November-2016
-----------------------------
-Added
-+++++
-  - Add support for Django 1.10
-
-Changed
-+++++++
-  - Fix for unsafe characters into URLs
-  - Clarifying warning on missing or unreadable file. Thanks to @nickcatal
-  - Fix support for Oracle urls
-  - Fix support for django-redis
-
-`v0.4.0`_ - 23-September-2015
------------------------------
-Added
-+++++
-  - New email schemes - smtp+ssl and smtp+tls (smtps would be deprecated)
-  - Add tuple support. Thanks to @anonymouzz
-  - Add LDAP url support for database (django-ldapdb)
-
-Changed
-+++++++
-  - Fix non-ascii values (broken in Python 2.x)
-  - redis_cache replaced by django_redis
-  - Fix psql/pgsql url
-
-`v0.3`_ - 03-June-2014
-----------------------
-Added
-+++++
-  - Add cache url support
-  - Add email url support
-  - Add search url support
-
-Changed
-+++++++
-  - Rewriting README.rst
-
-0.2.1 19-April-2013
--------------------
-Changed
-+++++++
-  - environ/environ.py: Env.__call__ now uses Env.get_value instance method
-
-0.2 16-April-2013
------------------
-Changed
-+++++++
-  - environ/environ.py, environ/test.py, environ/test_env.txt: add advanced
-    float parsing (comma and dot symbols to separate thousands and decimals)
-  - README.rst, docs/index.rst: fix TYPO in documentation
-
-0.1 2-April-2013
------------------
-Added
-+++++
-  - initial release
+* Added validation fro empty cache url and unknown cache scheme.
+* Removes usage of ``basestring`` in favour of ``str``.
 
 
-.. _v0.4.5: https://github.com/joke2k/django-environ/compare/v0.4.4...v0.4.5
-.. _v0.4.4: https://github.com/joke2k/django-environ/compare/v0.4.3...v0.4.4
-.. _v0.4.3: https://github.com/joke2k/django-environ/compare/v0.4.2...v0.4.3
-.. _v0.4.2: https://github.com/joke2k/django-environ/compare/v0.4.1...v0.4.2
-.. _v0.4.1: https://github.com/joke2k/django-environ/compare/v0.4.0...v0.4.1
-.. _v0.4.0: https://github.com/joke2k/django-environ/compare/v0.3...v0.4.0
-.. _v0.3: https://github.com/joke2k/django-environ/compare/v0.2.1...v0.3
-.. _`Keep a Changelog`: http://keepachangelog.com/en/1.0.0/
-.. _`Semantic Versioning`: http://semver.org/spec/v2.0.0.html
+Bug Fixes
+^^^^^^^^^
+
+* Fixed various code linting errors added this check to CI.
+* Added missed ``cast=str`` to ``Env.str()`` method.
+
+
+Improved Documentation
+^^^^^^^^^^^^^^^^^^^^^^
+
+* Improved documentation and fixed misspellings.
+
+
+Trivial/Internal Changes
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Move CI/CD to GitHub Actions.
+* Refactor tests to use pytest and follow DRY.
+* Used tox for tests.
+* Fixed spelling in example `.env` code block.
+
+
+----
+
+
+0.4.5 (2018-06-25)
+------------------
+
+Features
+^^^^^^^^
+
+* Provided support for Django 2.0.
+* Provided support for smart casting.
+* Provided support PostgreSQL unix domain socket paths.
+* Tip: Multiple env files.
+
+
+Bug Fixes
+^^^^^^^^^
+
+* Fixed parsing option values None, True and False.
+
+
+Improvements
+^^^^^^^^^^^^
+
+* Order of importance of engine configuration in ``db_url_config``.
+* Remove django and six dependencies.
+
+
+----
+
+
+0.4.4 (2017-08-21)
+------------------
+
+Features
+^^^^^^^^
+
+* Provided support for ``django-redis`` multiple locations (master/slave, shards).
+* Provided support for ``Elasticsearch2``.
+* Provided support for Mysql-connector.
+* Provided support for ``pyodbc``.
+* Added ``__contains__`` feature to ``Environ`` class.
+
+
+Bug Fixes
+^^^^^^^^^
+
+* Fix ``Path`` subtracting.
+
+
+----
+
+
+0.4.3 (2017-08-21)
+------------------
+
+
+Bug Fixes
+^^^^^^^^^
+
+* Rollback the default ``Environ`` to ``os.environ``.
+
+
+----
+
+
+0.4.2 (2017-04-13)
+------------------
+
+Features
+^^^^^^^^
+
+* Confirmed support for Django 1.11.
+* Provided support for Redshift database URL.
+
+
+Bug Fixes
+^^^^^^^^^
+
+* Fixed uwsgi settings reload issue.
+
+
+Improvements
+^^^^^^^^^^^^
+
+* Updated support for ``django-redis`` urls.
+
+
+----
+
+
+0.4.1 (2016-11-13)
+------------------
+
+Features
+^^^^^^^^
+
+* Added support for Django 1.10.
+
+
+Bug Fixes
+^^^^^^^^^
+
+* Fixed for unsafe characters into URLs.
+* Fixed support for Oracle urls.
+* Fixed support for ``django-redis``.
+
+
+Improvements
+^^^^^^^^^^^^
+
+* Clarifying warning on missing or unreadable file.
+
+
+----
+
+
+0.4.0 (2015-09-23)
+------------------
+
+Breaking Changes
+^^^^^^^^^^^^^^^^
+
+* ``redis_cache`` replaced by ``django_redis``.
+
+
+Features
+^^^^^^^^
+
+* Added new email schemes - ``smtp+ssl`` and ``smtp+tls``
+  (smtps would be deprecated).
+* Added tuple support.
+* Added LDAP url support for database.
+
+
+Bug Fixes
+^^^^^^^^^
+
+* Fixed non-ascii values (broken in Python 2.x).
+* Fixed psql/pgsql url.
+
+
+----
+
+
+0.3 (2014-06-03)
+----------------
+
+Features
+^^^^^^^^
+
+* Added cache url support.
+* Added email url support.
+* Added search url support.
+
+
+Improved Documentation
+^^^^^^^^^^^^^^^^^^^^^^
+
+* Rewriting README.rst.
+
+
+----
+
+
+0.2.1 (2013-04-19)
+------------------
+
+Improvements
+^^^^^^^^^^^^
+
+* ``Env.__call__`` now uses ``Env.get_value`` instance method.
+
+
+----
+
+
+0.2 (2013-04-16)
+----------------
+
+Features
+^^^^^^^^
+
+* Added advanced float parsing (comma and dot symbols to separate thousands and decimals).
+
+
+Improved Documentation
+^^^^^^^^^^^^^^^^^^^^^^
+
+* Fixed typos in documentation.
+
+
+----
+
+
+0.1 (2013-04-02)
+----------------
+
+Features
+^^^^^^^^
+
+* Initial release.
