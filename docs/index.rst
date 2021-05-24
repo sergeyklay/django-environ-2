@@ -1,64 +1,62 @@
-Welcome to Django-environ's documentation!
-==========================================
+================
+django-environ-2
+================
 
-.. automodule:: environ.environ
+Release v\ |release| (`What's new? <changelog>`).
 
 .. include:: ../README.rst
+   :start-after: teaser-begin
+   :end-before: teaser-end
 
-environ.Env
+
+Overview
+========
+
+.. include:: ../README.rst
+   :start-after: -overview-
+   :end-before: -project-information-
+
+
+Quick Start
 ===========
 
-..  autoclass:: environ.environ.Env
+.. include:: ../README.rst
+   :start-after: -code-begin-
+   :end-before: -overview-
 
-    ..  autoattribute:: BOOLEAN_TRUE_STRINGS
-    ..  autoattribute:: DB_SCHEMES
-    ..  autoattribute:: DEFAULT_DATABASE_ENV
-    ..  autoattribute:: CACHE_SCHEMES
-    ..  autoattribute:: DEFAULT_CACHE_ENV
-    ..  autoattribute:: EMAIL_SCHEMES
-    ..  autoattribute:: DEFAULT_EMAIL_ENV
-    ..  autoattribute:: SEARCH_SCHEMES
-    ..  autoattribute:: DEFAULT_SEARCH_ENV
+.. include:: ../README.rst
+   :start-after: -support-
+   :end-before: -similar-projects-
 
-    ..  automethod:: __call__
-    ..  automethod:: str
-    ..  automethod:: bool
-    ..  automethod:: int
-    ..  automethod:: float
-    ..  automethod:: json
-    ..  automethod:: list
-    ..  automethod:: dict
-    ..  automethod:: url
-    ..  automethod:: db_url
-    ..  automethod:: cache_url
-    ..  automethod:: email_url
-    ..  automethod:: search_url
-    ..  automethod:: path
+.. include:: ../README.rst
+   :start-after: -similar-projects-
 
-    ..  automethod:: read_env
-    ..  automethod:: db_url_config
-    ..  automethod:: cache_url_config
-    ..  automethod:: email_url_config
-    ..  automethod:: search_url_config
-    ..  automethod:: get_value
-    ..  automethod:: parse_value
+----
 
+Full Table of Contents
+======================
 
-environ.Path
-============
+.. toctree::
+   :maxdepth: 2
 
-..  autoclass:: environ.environ.Path
+   installation
+   types
+   tips
 
-    ..  py:attribute:: root -> Retrieve absolute path
-    ..  automethod:: __call__
-    ..  automethod:: path
-    ..  automethod:: file
+.. include:: ../README.rst
+   :start-after: -project-information-
+   :end-before: -support-
+
+.. toctree::
+   :maxdepth: 1
+
+   license
+   changelog
 
 
 Indices and tables
 ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+* `genindex`
+* `search`
 
