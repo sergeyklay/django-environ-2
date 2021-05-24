@@ -52,7 +52,7 @@ def load_long_description():
             '===================\n',
             changes(),
             '',
-            f"`Full changelog <{find_meta('url')}/blob/develop/CHANGELOG.rst>`_.",  # noqa: E501
+            f"`Full changelog <{find_meta('url')}/blob/master/CHANGELOG.rst>`_.",  # noqa: E501
             '',
             read_file(path.join(PKG_DIR, 'SECURITY.rst')),
             '',
