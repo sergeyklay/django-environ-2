@@ -1,16 +1,23 @@
-"""
-environ.compat
-~~~~~~~~~~~~~~~
-This module handles import compatibility issues
-"""
+# This file is part of the django-environ.
+#
+# Copyright (C) 2021 Serghei Iakovlev <egrep@protonmail.ch>
+# Copyright (C) 2013-2021 Daniele Faraglia
+#
+# For the full copyright and license information, please view
+# the LICENSE file that was distributed with this source code.
+
+# Tox (http://tox.testrun.org/) - run tests in multiple virtualenvs.
+# Also contains configuration settings for all tools executed by Tox.
+
+"""This module handles import compatibility issues."""
 
 import pkgutil
 
 
 if pkgutil.find_loader('simplejson'):
-    import simplejson as json  # noqa
+    import simplejson as json
 else:
-    import json  # noqa
+    import json
 
 if pkgutil.find_loader('django'):
     from django import VERSION as DJANGO_VERSION
