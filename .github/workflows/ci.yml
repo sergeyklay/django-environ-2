@@ -72,6 +72,14 @@ jobs:
       - name: Test with tox
         run: tox
 
+      - name: Upload coverage report
+        if: success()
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        run:
+          pip --use-feature=in-tree-build install python-coveralls
+          coveralls
+
       - name: Success Reporting
         if: success()
         run: git log --format=fuller -5
