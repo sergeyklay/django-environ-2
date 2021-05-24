@@ -77,7 +77,7 @@ jobs:
         env:
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         run: |
-          pip --use-feature=in-tree-build install python-coveralls
+          pip --use-feature=in-tree-build install coveralls
           coveralls
 
       - name: Success Reporting
