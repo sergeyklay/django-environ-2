@@ -8,9 +8,9 @@ import pkgutil
 
 
 if pkgutil.find_loader('simplejson'):
-    import simplejson as json
+    import simplejson as json  # noqa
 else:
-    import json
+    import json  # noqa
 
 if pkgutil.find_loader('django'):
     from django import VERSION as DJANGO_VERSION

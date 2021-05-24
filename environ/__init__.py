@@ -1,1 +1,1 @@
-from .environ import *
+from .environ import *  # noqa

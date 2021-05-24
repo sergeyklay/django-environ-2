@@ -17,6 +17,11 @@ Changed
   - Move CI/CD to GitHub Actions
   - Refactor tests to use pytest and follow DRY
 
+Fixed
++++++
+  - Fixed various code linting errors added this check to CI
+
+
 `v0.4.5`_ - 25-June-2018
 --------------------------
 Added
