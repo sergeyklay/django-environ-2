@@ -1,13 +1,13 @@
-# This file is part of the django-environ.
+# This file is part of the django-environ-2.
 #
 # Copyright (C) 2021 Serghei Iakovlev <egrep@protonmail.ch>
-# Copyright (C) 2013-2021 Daniele Faraglia
+# Copyright (C) 2013-2021 Daniele Faraglia <daniele.faraglia@gmail.com>
 #
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
 """
-Django-environ allows you to utilize 12factor inspired environment
+django-environ-2 allows you to utilize 12factor inspired environment
 variables to configure your Django application.
 """
 
@@ -29,11 +29,6 @@ from urllib.parse import (
 from .compat import json, DJANGO_POSTGRES, REDIS_DRIVER, ImproperlyConfigured
 
 logger = logging.getLogger(__name__)
-
-
-VERSION = '0.4.5'
-__author__ = 'joke2k'
-__version__ = tuple(VERSION.split('.'))
 
 
 def _cast(value):
