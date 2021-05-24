@@ -39,5 +39,3 @@ __maintainer__ = 'Serghei Iakovlev'
 __maintainer_email__ = 'egrep@protonmail.ch'
 __url__ = 'https://github.com/sergeyklay/django-environ-2'
 __description__ = 'Configure Django made easy.'  # noqa
-
-#
