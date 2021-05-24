@@ -9,7 +9,7 @@
             <img src="https://coveralls.io/repos/github/sergeyklay/django-environ-2/badge.svg" alt="Coverage Status" />
         </a>
         <a href="https://github.com/sergeyklay/django-environ-2/actions?workflow=CI">
-            <img src="https://github.com/sergeyklay/django-environ-2/workflows/CI/badge.svg?branch=develop" alt="CI Status" />
+            <img src="https://github.com/sergeyklay/django-environ-2/workflows/CI/badge.svg?branch=master" alt="CI Status" />
         </a>
         <a href="https://raw.githubusercontent.com/sergeyklay/django-environ-2/master/LICENSE.txt">
             <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Package license" />

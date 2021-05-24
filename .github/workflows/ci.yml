@@ -12,7 +12,6 @@ on:
   push:
     branches:
       - master
-      - develop
       - 'feature/**'
       - 'release/**'
       - 'hotfix/**'
@@ -22,7 +21,6 @@ on:
   pull_request:
     branches:
       - master
-      - develop
       - 'v[0-9]+.[0-9]+.x'
 
 defaults:
