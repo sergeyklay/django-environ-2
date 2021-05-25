@@ -8,6 +8,7 @@
 
 import logging
 import os
+import pathlib
 from urllib.parse import quote
 
 import pytest
@@ -47,6 +48,8 @@ class TestEnv:
         [
             os.path.join(os.path.dirname(__file__), 'test_env.txt'),
             Path(os.path.join(os.path.dirname(__file__), 'test_env.txt')),
+            pathlib.Path(__file__).parent.joinpath('test_env.txt'),
+            pathlib.Path(__file__).parent / 'test_env.txt'
         ],
     )
     def test_read_env(self, env_file, caplog):

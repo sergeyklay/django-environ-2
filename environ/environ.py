@@ -20,6 +20,7 @@ import re
 import sys
 import urllib.parse as urlparselib
 import warnings
+from pathlib import PosixPath, WindowsPath
 from urllib.parse import (
     urlparse,
     urlunparse,
@@ -738,6 +739,12 @@ class Env:
         try:
             if isinstance(env_file, (str, Path)):
                 with open(env_file) as f:
+                    content = f.read()
+            elif isinstance(env_file, PosixPath):
+                with open(env_file.as_posix()) as f:
+                    content = f.read()
+            elif isinstance(env_file, WindowsPath):
+                with open(env_file.__str__()) as f:
                     content = f.read()
             else:
                 with env_file as f:

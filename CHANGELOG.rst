@@ -10,7 +10,7 @@ releases, in reverse chronological order.
 Features
 ^^^^^^^^
 
-* Allows use of ``Path`` objects when reading env from the filesystem.
+* Allows use of ``pathlib.Path`` objects when reading env from the filesystem.
   This enables use of ``env.read_env(BASE_DIR / '.env')`` instead of
   ``read_env(os.path.join(BASE_DIR, '.env'))``.
 

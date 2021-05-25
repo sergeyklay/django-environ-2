@@ -122,11 +122,13 @@ Now ``ENV_PATH=other-env ./manage.py runserver`` uses ``other-env`` while ``./ma
 Using Path objects when reading env
 ===================================
 
-It is possible to use of Path objects when reading env from the filesystem:
+It is possible to use of ``pathlib.Path`` objects when reading environment file from the filesystem:
 
 .. code-block:: python
 
     import os
+    import pathlib
+
     import environ
 
 
@@ -135,6 +137,8 @@ It is possible to use of Path objects when reading env from the filesystem:
 
     env = environ.Env()
 
-    # The two expressions below are equivalent
-    env.read_env(BASE_DIR / 'settings.env')
+    # The four expressions below are equivalent
+    env.read_env(BASE_DIR('settings.env'))
     env.read_env(os.path.join(BASE_DIR, 'settings.env'))
+    env.read_env(pathlib.Path(str(BASE_DIR)).joinpath('test_env.txt'))
+    env.read_env(pathlib.Path(str(BASE_DIR)) / 'test_env.txt')
