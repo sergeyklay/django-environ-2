@@ -5,6 +5,32 @@ This file contains a brief summary of new features and dependency changes or
 releases, in reverse chronological order.
 
 
+2.0.1 (2021-05-25)
+------------------
+
+Bug Fixes
+^^^^^^^^^
+
+* Fixed changelog URL in package description.
+* Added missed ``test_env.txt`` to the package contents.
+
+
+Improved Documentation
+^^^^^^^^^^^^^^^^^^^^^^
+
+* Improved package documentation.
+* Fixed misspellings in the documentation.
+
+
+Trivial/Internal Changes
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+* Added testing dependencies to ``setup.py``.
+
+
+----
+
+
 2.0.0 (2021-05-25)
 ------------------
 
