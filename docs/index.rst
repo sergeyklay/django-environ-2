@@ -1,6 +1,6 @@
-================
-django-environ-2
-================
+=========================================
+Welcome to django-environ-2 documentation
+=========================================
 
 Release v\ |release| (`What's new? <changelog>`).
 

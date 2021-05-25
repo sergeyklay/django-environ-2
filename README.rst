@@ -136,3 +136,4 @@ Similar projects
 There are some projects similar to ``django-environ-2`` you may be interested in:
 
 * https://github.com/joke2k/django-environ
+* https://github.com/theskumar/python-dotenv
