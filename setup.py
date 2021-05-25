@@ -52,7 +52,7 @@ def load_long_description():
             '===================\n',
             changes(),
             '',
-            f"`Full changelog <{find_meta('url')}/en/latest/changelog.htm>`_.",
+            f"`Full changelog <{find_meta('url')}/en/latest/changelog.html>`_.",
             '',
             read_file(path.join(PKG_DIR, 'SECURITY.rst')),
             '',
@@ -171,6 +171,7 @@ EXTRAS_REQUIRE = {
 # Project's URLs
 PROJECT_URLS = {
     'Documentation': 'https://django-environ-2.readthedocs.io',
+    "Changelog": f"{find_meta('url')}/en/latest/changelog.html",
     'Bug Tracker': 'https://github.com/sergeyklay/django-environ-2/issues',
     'Source Code': 'https://github.com/sergeyklay/django-environ-2',
 }
