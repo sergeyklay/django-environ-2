@@ -15,32 +15,32 @@ Supported types
 * ``path``: ``(environ.Path)``
 * ``db_url``
 
-  *  PostgreSQL: ``postgres://``, ``pgsql://``, ``psql://`` or ``postgresql://``
-  *  PostGIS: ``postgis://``
-  *  MySQL: ``mysql://`` or ``mysql2://``
-  *  MySQL for GeoDjango: ``mysqlgis://``
-  *  Mysql Connector Python from Oracle: ``mysql-connector://``
-  *  SQLITE: ``sqlite://``
-  *  SQLITE with SPATIALITE for GeoDjango: ``spatialite://``
-  *  Oracle: ``oracle://``
-  *  MSSQL: ``mssql://``
-  *  PyODBC: ``pyodbc://``
-  *  Redshift: ``redshift://``
-  *  LDAP: ``ldap://``
+  * PostgreSQL: ``postgres://``, ``pgsql://``, ``psql://`` or ``postgresql://``
+  * PostGIS: ``postgis://``
+  * MySQL: ``mysql://`` or ``mysql2://``
+  * MySQL for GeoDjango: ``mysqlgis://``
+  * MySQL Connector Python from Oracle: ``mysql-connector://``
+  * SQLite: ``sqlite://``
+  * SQLite with SpatiaLite for GeoDjango: ``spatialite://``
+  * Oracle: ``oracle://``
+  * Microsoft SQL Server: ``mssql://``
+  * PyODBC: ``pyodbc://``
+  * Amazon Redshift: ``redshift://``
+  * LDAP: ``ldap://``
 
 * ``cache_url``
 
-  *  Database: ``dbcache://``
-  *  Dummy: ``dummycache://``
-  *  File: ``filecache://``
-  *  Memory: ``locmemcache://``
-  *  Memcached: ``memcache://``
-  *  Python memory: ``pymemcache://``
-  *  Redis: ``rediscache://``, ``redis://``, or ``rediss://``
+  * Database: ``dbcache://``
+  * Dummy: ``dummycache://``
+  * File: ``filecache://``
+  * Memory: ``locmemcache://``
+  * Memcached: ``memcache://``
+  * Python memory: ``pymemcache://``
+  * Redis: ``rediscache://``, ``redis://``, or ``rediss://``
 
 * ``search_url``
 
-  * ElasticSearch: ``elasticsearch://``
+  * Elasticsearch: ``elasticsearch://``
   * Solr: ``solr://``
   * Whoosh: ``whoosh://``
   * Xapian: ``xapian://``

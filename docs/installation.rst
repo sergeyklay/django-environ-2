@@ -20,7 +20,7 @@ The recommended installation method is `pip <https://pip.pypa.io/en/stable/>`_-i
 
 .. note::
 
-   After installing django-environ-2, no need to add it to ``INSTALLED_APPS``.
+   After installing ``django-environ-2``, no need to add it to ``INSTALLED_APPS``.
 
 Then create a ``.env`` file. The file format can be understood from the example below:
 
@@ -42,7 +42,7 @@ And use it with ``settings.py`` as follows:
 .. warning::
 
     Don't forget to add ``.env`` in your ``.gitignore``. You can also add
-    ``.env.example`` with a template of your variables to the project repo.
+    ``.env.dist`` with a template of your variables to the project repo.
 
 Unstable version
 ================

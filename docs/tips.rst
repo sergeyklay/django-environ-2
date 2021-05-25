@@ -20,8 +20,10 @@ Smart Casting
 ``django-environ-2`` has a "Smart-casting" enabled by default, if you don't provide a ``cast`` type, it will be detected from ``default`` type.
 This could raise side effects (see `#192 <https://github.com/joke2k/django-environ/issues/192>`_).
 To disable it use ``env.smart_cast = False``.
-New major release will disable it as default.
-The next major release will disable it by default.
+
+.. note::
+
+    The next major release will disable it by default.
 
 
 Multiple redis cache locations
@@ -41,8 +43,11 @@ In order to set email configuration for django you can use this code:
 
 .. code-block:: python
 
-    EMAIL_CONFIG = env.email_url(
-        'EMAIL_URL', default='smtp://user:password@localhost:25')
+    # The email() method is an alias for email_url().
+    EMAIL_CONFIG = env.email(
+        'EMAIL_URL',
+        default='smtp://user:password@localhost:25'
+    )
 
     vars().update(EMAIL_CONFIG)
 
