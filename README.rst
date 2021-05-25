@@ -117,7 +117,7 @@ and the latest release on `PyPI <https://pypi.org/project/django-environ-2/>`_.
 It’s rigorously tested on Python 3.6+, and officially supports
 Django 1.11, 2.2, 3.0, 3.1 and 3.2.
 
-If you'd like to contribute to Gstore you're most welcome!
+If you'd like to contribute to ``django-environ-2`` you're most welcome!
 
 .. -support-
 

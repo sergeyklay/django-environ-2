@@ -6,9 +6,11 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-"""
+"""Configure Django made easy.
+
 django-environ-2 allows you to utilize 12factor inspired environment
 variables to configure your Django application.
+
 """
 
 import ast

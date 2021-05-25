@@ -52,7 +52,7 @@ def load_long_description():
             '===================\n',
             changes(),
             '',
-            f"`Full changelog <{find_meta('url')}/en/latest/changelog.htm>`_.",
+            f"`Full changelog <{find_meta('url')}/en/latest/changelog.html>`_.",
             '',
             read_file(path.join(PKG_DIR, 'SECURITY.rst')),
             '',
@@ -157,19 +157,24 @@ DEPENDENCY_LINKS = []
 #
 EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
-    'testing': [],
+    'testing': [
+        "pytest>=6.2.0",  # Our test framework
+        'pytest-cov>=2.11.1',  # Pytest plugin for measuring coverage
+    ],
     # Dependencies that are required to develop package
     'develop': [],
     # Dependencies that are required to build documentation
     'docs': [
         'furo>=2020.12.30b24,==2020.12.*',  # Sphinx documentation theme
         'sphinx>=3.5.0',  # Python documentation generator
+        "sphinx-notfound-page",  # Create a custom 404 page
     ],
 }
 
 # Project's URLs
 PROJECT_URLS = {
     'Documentation': 'https://django-environ-2.readthedocs.io',
+    "Changelog": f"{find_meta('url')}/en/latest/changelog.html",
     'Bug Tracker': 'https://github.com/sergeyklay/django-environ-2/issues',
     'Source Code': 'https://github.com/sergeyklay/django-environ-2',
 }

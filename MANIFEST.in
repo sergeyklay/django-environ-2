@@ -16,6 +16,7 @@ include AUTHORS.rst CHANGELOG.rst CONTRIBUTING.rst LICENSE README.rst SECURITY.r
 # Many OS distributions prefers provide an ability run the tests
 # during the package installation.
 recursive-include tests *.py
+recursive-include tests *.txt
 
 # All files in the sdist with a .pyc, .pyo, or .pyd extension will be removed
 # from the sdist.
