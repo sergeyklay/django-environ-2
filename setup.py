@@ -157,7 +157,10 @@ DEPENDENCY_LINKS = []
 #
 EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
-    'testing': [],
+    'testing': [
+        "pytest>=6.2.0",  # Our test framework
+        'pytest-cov>=2.11.1',  # Pytest plugin for measuring coverage
+    ],
     # Dependencies that are required to develop package
     'develop': [],
     # Dependencies that are required to build documentation
