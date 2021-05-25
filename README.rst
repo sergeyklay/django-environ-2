@@ -25,7 +25,7 @@ Django application with environment variables.
 .. teaser-end
 
 For that, it gives you an easy way to configure Django application using
-environment variables obtained from a file or OS:
+environment variables obtained from a file or provided by OS:
 
 .. -code-begin-
 
@@ -37,13 +37,14 @@ environment variables obtained from a file or OS:
         # set casting, default value
         DEBUG=(bool, False)
     )
+
     # reading .env file
     environ.Env.read_env()
 
-    # False if not in os.environ
+    # False if not in os.environ because of casting above
     DEBUG = env('DEBUG')
 
-    # Raises django's ImproperlyConfigured
+    # Raises Django's ImproperlyConfigured
     # exception if SECRET_KEY not in os.environ
     SECRET_KEY = env('SECRET_KEY')
 
@@ -52,10 +53,11 @@ environment variables obtained from a file or OS:
     DATABASES = {
         # read os.environ['DATABASE_URL'] and raises
         # ImproperlyConfigured exception if not found
+        #
+        # The db() method is an alias for db_url().
         'default': env.db(),
 
         # read os.environ['SQLITE_URL']
-        # The db() method is an alias for db_url().
         'extra': env.db_url(
             'SQLITE_URL',
             default='sqlite:////tmp/my-tmp-sqlite.db'
@@ -65,10 +67,11 @@ environment variables obtained from a file or OS:
     CACHES = {
         # Read os.environ['CACHE_URL'] and raises
         # ImproperlyConfigured exception if not found.
+        #
+        # The cache() method is an alias for cache_url().
         'default': env.cache(),
 
         # read os.environ['REDIS_URL']
-        # The cache() method is an alias for cache_url().
         'redis': env.cache_url('REDIS_URL')
     }
 
@@ -88,14 +91,14 @@ article.
 Using ``django-environ-2`` you can stop to make a lot of unversioned
 ``settings_*.py`` to configure your app.
 See `cookiecutter-django <https://github.com/pydanny/cookiecutter-django>`_ for
-a concrete example on using with a django project.
+a concrete example on using with a Django project.
 
 Feature Support
 ---------------
 * Fast and easy multi environment for deploy
 * Fill ``os.environ`` with .env file variables
 * Variables casting
-* Url variables exploded to django specific package settings
+* Url variables exploded to Django specific package settings
 
 .. -project-information-
 

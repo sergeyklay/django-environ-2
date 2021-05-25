@@ -53,7 +53,7 @@ Trivial/Internal Changes
 * Move CI/CD to GitHub Actions.
 * Refactor tests to use pytest and follow DRY.
 * Used tox for tests.
-* Fixed spelling in example `.env` code block.
+* Fixed spelling in example ``.env`` code block.
 
 
 ----
