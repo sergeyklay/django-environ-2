@@ -93,8 +93,8 @@ Using ``django-environ-2`` you can stop to make a lot of unversioned
 See `cookiecutter-django <https://github.com/pydanny/cookiecutter-django>`_ for
 a concrete example on using with a Django project.
 
-Feature Support
----------------
+Feature Support:
+
 * Fast and easy multi environment for deploy
 * Fill ``os.environ`` with .env file variables
 * Variables casting
@@ -109,7 +109,7 @@ Project Information
 initially written by `Daniele Faraglia <https://github.com/joke2k>`_ to breathe
 new life into it and set a more dynamic pace of development.
 
-``django-environ-2`` is released under the `MIT / X11 License <https://choosealicense.com/licenses/mit/>`_,
+``django-environ-2`` is released under the `MIT / X11 License <https://choosealicense.com/licenses/mit/>`__,
 its documentation lives at `Read the Docs <https://django-environ-2.readthedocs.io/>`_,
 the code on `GitHub <https://github.com/sergeyklay/django-environ-2>`_,
 and the latest release on `PyPI <https://pypi.org/project/django-environ-2/>`_.
