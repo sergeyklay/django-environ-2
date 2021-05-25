@@ -181,7 +181,7 @@ if __name__ == '__main__':
         author=find_meta('author'),
         author_email=find_meta('author_email'),
         maintainer=find_meta('maintainer'),
-        maintainer_email=find_meta('maintainer'),
+        maintainer_email=find_meta('maintainer_email'),
         license=find_meta('license'),
         description=find_meta('description'),
         long_description=load_long_description(),
