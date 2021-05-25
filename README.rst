@@ -50,24 +50,26 @@ environment variables obtained from a file or OS:
     # Parse database connection url strings
     # like psql://user:pass@127.0.0.1:8458/db
     DATABASES = {
-        # read os.environ['DATABASE_URL'] and
-        # raises ImproperlyConfigured exception if not found
+        # read os.environ['DATABASE_URL'] and raises
+        # ImproperlyConfigured exception if not found
         'default': env.db(),
 
         # read os.environ['SQLITE_URL']
-        'extra': env.db(
+        # The db() method is an alias for db_url().
+        'extra': env.db_url(
             'SQLITE_URL',
             default='sqlite:////tmp/my-tmp-sqlite.db'
         )
     }
 
     CACHES = {
-        # read os.environ['CACHE_URL'] and
-        # raises ImproperlyConfigured exception if not found
+        # Read os.environ['CACHE_URL'] and raises
+        # ImproperlyConfigured exception if not found.
         'default': env.cache(),
 
         # read os.environ['REDIS_URL']
-        'redis': env.cache('REDIS_URL')
+        # The cache() method is an alias for cache_url().
+        'redis': env.cache_url('REDIS_URL')
     }
 
 .. -overview-
