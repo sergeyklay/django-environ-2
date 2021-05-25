@@ -4,6 +4,19 @@ Changelog
 This file contains a brief summary of new features and dependency changes or
 releases, in reverse chronological order.
 
+2.1.0 (2021-XX-XX)
+------------------
+
+Features
+^^^^^^^^
+
+* Allows use of ``Path`` objects when reading env from the filesystem.
+  This enables use of ``env.read_env(BASE_DIR / '.env')`` instead of
+  ``read_env(os.path.join(BASE_DIR, '.env'))``.
+
+
+----
+
 
 2.0.1 (2021-05-25)
 ------------------

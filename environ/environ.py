@@ -736,7 +736,7 @@ class Env:
                 return
 
         try:
-            if isinstance(env_file, str):
+            if isinstance(env_file, (str, Path)):
                 with open(env_file) as f:
                     content = f.read()
             else:
@@ -830,6 +830,7 @@ class Path:
         elif isinstance(other, str):
             if self.__root__.endswith(other):
                 return Path(self.__root__.rstrip(other))
+
         raise TypeError(
             "unsupported operand type(s) for -: '{self}' and '{other}' "
             "unless value of {self} ends with value of {other}".format(

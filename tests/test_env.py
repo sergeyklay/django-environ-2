@@ -6,6 +6,7 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
+import logging
 import os
 from urllib.parse import quote
 
@@ -40,6 +41,19 @@ class TestEnv:
 
     def test_not_present_with_default(self):
         assert self.env('not_present', default=3) == 3
+
+    @pytest.mark.parametrize(
+        'env_file',
+        [
+            os.path.join(os.path.dirname(__file__), 'test_env.txt'),
+            Path(os.path.join(os.path.dirname(__file__), 'test_env.txt')),
+        ],
+    )
+    def test_read_env(self, env_file, caplog):
+        env = Env()
+        with caplog.at_level(logging.DEBUG):
+            env.read_env(env_file)
+        assert 'Read environment variables from:' in caplog.text
 
     def test_not_present_without_default(self):
         with pytest.raises(ImproperlyConfigured) as excinfo:
