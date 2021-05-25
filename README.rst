@@ -2,8 +2,8 @@
 
     <h1 align="center">django-environ-2</h1>
     <p align="center">
-        <a href="https://pypi.python.org/pypi/django-environ">
-            <img src="https://img.shields.io/pypi/v/django-environ.svg" alt="Latest version released on PyPi" />
+        <a href="https://pypi.python.org/pypi/django-environ-2">
+            <img src="https://img.shields.io/pypi/v/django-environ-2.svg" alt="Latest version released on PyPi" />
         </a>
         <a href="https://coveralls.io/github/sergeyklay/django-environ-2">
             <img src="https://coveralls.io/repos/github/sergeyklay/django-environ-2/badge.svg" alt="Coverage Status" />
@@ -50,25 +50,29 @@ environment variables obtained from a file or OS:
     # Parse database connection url strings
     # like psql://user:pass@127.0.0.1:8458/db
     DATABASES = {
-        # read os.environ['DATABASE_URL'] and
-        # raises ImproperlyConfigured exception if not found
+        # read os.environ['DATABASE_URL'] and raises
+        # ImproperlyConfigured exception if not found
         'default': env.db(),
 
         # read os.environ['SQLITE_URL']
-        'extra': env.db(
+        # The db() method is an alias for db_url().
+        'extra': env.db_url(
             'SQLITE_URL',
             default='sqlite:////tmp/my-tmp-sqlite.db'
         )
     }
 
     CACHES = {
-        # read os.environ['CACHE_URL'] and
-        # raises ImproperlyConfigured exception if not found
+        # Read os.environ['CACHE_URL'] and raises
+        # ImproperlyConfigured exception if not found.
         'default': env.cache(),
 
         # read os.environ['REDIS_URL']
-        'redis': env.cache('REDIS_URL')
+        # The cache() method is an alias for cache_url().
+        'redis': env.cache_url('REDIS_URL')
     }
+
+.. -overview-
 
 The idea of this package is to unify a lot of packages that make the same stuff:
 Take a string from ``os.environ``, parse and cast it to some of useful python
@@ -107,7 +111,8 @@ its documentation lives at `Read the Docs <https://django-environ-2.readthedocs.
 the code on `GitHub <https://github.com/sergeyklay/django-environ-2>`_,
 and the latest release on `PyPI <https://pypi.org/project/django-environ-2/>`_.
 
-It’s rigorously tested on Python 3.6+, and officially supports Django 1.11, 2.2, 3.0, 3.1, 3.2.
+It’s rigorously tested on Python 3.6+, and officially supports
+Django 1.11, 2.2, 3.0, 3.1 and 3.2.
 
 If you'd like to contribute to Gstore you're most welcome!
 

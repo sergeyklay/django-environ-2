@@ -11,6 +11,10 @@
 This module tracks the version of the package as well as the base
 package info used by various functions within django-environ-2.
 
+Modules:
+
+    environ
+
 Misc variables:
 
     __copyright__
@@ -37,5 +41,5 @@ __author__ = 'Daniele Faraglia'
 __author_email__ = 'daniele.faraglia@gmail.com'
 __maintainer__ = 'Serghei Iakovlev'
 __maintainer_email__ = 'egrep@protonmail.ch'
-__url__ = 'https://github.com/sergeyklay/django-environ-2'
-__description__ = 'Configure Django made easy.'  # noqa
+__url__ = 'https://django-environ-2.readthedocs.io'
+__description__ = 'Configure Django made easy.'

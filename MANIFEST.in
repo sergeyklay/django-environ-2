@@ -25,7 +25,6 @@ global-exclude *.py[cod]
 include docs/Makefile
 recursive-include docs *.png
 recursive-include docs *.svg
-recursive-include docs *.bat
 recursive-include docs *.py
 recursive-include docs *.rst
 prune docs/_build

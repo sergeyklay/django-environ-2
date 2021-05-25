@@ -52,7 +52,7 @@ def load_long_description():
             '===================\n',
             changes(),
             '',
-            f"`Full changelog <{find_meta('url')}/blob/master/CHANGELOG.rst>`_.",  # noqa: E501
+            f"`Full changelog <{find_meta('url')}/en/latest/changelog.htm>`_.",
             '',
             read_file(path.join(PKG_DIR, 'SECURITY.rst')),
             '',
@@ -160,12 +160,18 @@ EXTRAS_REQUIRE = {
     'testing': [],
     # Dependencies that are required to develop package
     'develop': [],
+    # Dependencies that are required to build documentation
+    'docs': [
+        'furo>=2020.12.30b24,==2020.12.*',  # Sphinx documentation theme
+        'sphinx>=3.5.0',  # Python documentation generator
+    ],
 }
 
 # Project's URLs
 PROJECT_URLS = {
-    'Bug Tracker': f"{find_meta('url')}/issues",
-    'Source Code': f"{find_meta('url')}",
+    'Documentation': 'https://django-environ-2.readthedocs.io',
+    'Bug Tracker': 'https://github.com/sergeyklay/django-environ-2/issues',
+    'Source Code': 'https://github.com/sergeyklay/django-environ-2',
 }
 
 if __name__ == '__main__':
