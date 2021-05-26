@@ -158,7 +158,7 @@ DEPENDENCY_LINKS = []
 EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
     'testing': [
-        "pytest>=6.2.0",  # Our test framework
+        'pytest>=6.2.0',  # Our test framework
         'pytest-cov>=2.11.1',  # Pytest plugin for measuring coverage
     ],
     # Dependencies that are required to develop package
@@ -167,14 +167,14 @@ EXTRAS_REQUIRE = {
     'docs': [
         'furo>=2020.12.30b24,==2020.12.*',  # Sphinx documentation theme
         'sphinx>=3.5.0',  # Python documentation generator
-        "sphinx-notfound-page",  # Create a custom 404 page
+        'sphinx-notfound-page',  # Create a custom 404 page
     ],
 }
 
 # Project's URLs
 PROJECT_URLS = {
     'Documentation': 'https://django-environ-2.readthedocs.io',
-    "Changelog": f"{find_meta('url')}/en/latest/changelog.html",
+    'Changelog': f"{find_meta('url')}/en/latest/changelog.html",
     'Bug Tracker': 'https://github.com/sergeyklay/django-environ-2/issues',
     'Source Code': 'https://github.com/sergeyklay/django-environ-2',
 }
