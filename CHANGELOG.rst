@@ -7,12 +7,27 @@ releases, in reverse chronological order.
 2.1.0 (2021-XX-XX)
 ------------------
 
+Bug Fixes
+^^^^^^^^^
+
+* Added missed files to the packages (tests and docs).
+* Don't include ``tests`` package in wheel. ``pip install django-environ-2``
+  used to install a top-level package 'tests'.
+
+
 Features
 ^^^^^^^^
 
 * Allows use of ``pathlib.Path`` objects when reading env from the filesystem.
   This enables use of ``env.read_env(BASE_DIR / '.env')`` instead of
   ``read_env(os.path.join(BASE_DIR, '.env'))``.
+
+
+Improvements
+^^^^^^^^^^^^
+
+* Changed additional groups of dependencies so that ``develop`` is superset
+  now for ``testing`` and ``docs``.
 
 
 ----

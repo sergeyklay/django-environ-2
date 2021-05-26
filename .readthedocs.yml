@@ -9,7 +9,8 @@
 ---
 version: 2
 python:
-  # Keep version in sync with tox.ini (docs and gh-actions).
+  # Keep version in sync with tox.ini (testenv:docs) and
+  # docs.yml (GitHub Action Workflow).
   version: 3.8
 
   install:

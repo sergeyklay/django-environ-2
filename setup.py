@@ -153,28 +153,29 @@ DEPENDENCY_LINKS = []
 # List additional groups of dependencies here (e.g. testing dependencies).
 # You can install these using the following syntax, for example:
 #
-#    $ pip install -e .[develop,testing]
+#    $ pip install -e .[develop,testing,docs]
 #
 EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
     'testing': [
-        "pytest>=6.2.0",  # Our test framework
-        'pytest-cov>=2.11.1',  # Pytest plugin for measuring coverage
+        'coverage[toml]>=5.0.2',  # Code coverage measurement for Python
+        'pytest>=6.2.0',  # Our test framework
     ],
-    # Dependencies that are required to develop package
-    'develop': [],
     # Dependencies that are required to build documentation
     'docs': [
         'furo>=2020.12.30b24,==2020.12.*',  # Sphinx documentation theme
         'sphinx>=3.5.0',  # Python documentation generator
-        "sphinx-notfound-page",  # Create a custom 404 page
+        'sphinx-notfound-page',  # Create a custom 404 page
     ],
 }
+
+# Dependencies that are required to develop package
+EXTRAS_REQUIRE['develop'] = EXTRAS_REQUIRE['testing'] + EXTRAS_REQUIRE['docs']
 
 # Project's URLs
 PROJECT_URLS = {
     'Documentation': 'https://django-environ-2.readthedocs.io',
-    "Changelog": f"{find_meta('url')}/en/latest/changelog.html",
+    'Changelog': f"{find_meta('url')}/en/latest/changelog.html",
     'Bug Tracker': 'https://github.com/sergeyklay/django-environ-2/issues',
     'Source Code': 'https://github.com/sergeyklay/django-environ-2',
 }
@@ -195,7 +196,7 @@ if __name__ == '__main__':
         url=find_meta('url'),
         project_urls=PROJECT_URLS,
         classifiers=CLASSIFIERS,
-        packages=find_packages(),
+        packages=find_packages(exclude=['tests.*', 'tests']),
         platforms=['any'],
         include_package_data=True,
         zip_safe=False,
