@@ -7,6 +7,12 @@ releases, in reverse chronological order.
 2.1.0 (2021-XX-XX)
 ------------------
 
+Bug Fixes
+^^^^^^^^^
+
+* Add missed files to the packages (tests and docs).
+
+
 Features
 ^^^^^^^^
 

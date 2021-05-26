@@ -153,7 +153,7 @@ DEPENDENCY_LINKS = []
 # List additional groups of dependencies here (e.g. testing dependencies).
 # You can install these using the following syntax, for example:
 #
-#    $ pip install -e .[develop,testing]
+#    $ pip install -e .[develop,testing,docs]
 #
 EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
