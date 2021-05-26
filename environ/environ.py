@@ -14,13 +14,13 @@ variables to configure your Django application.
 """
 
 import ast
+import json
 import logging
 import os
 import re
 import sys
 import urllib.parse as urlparselib
 import warnings
-import json
 from pathlib import PosixPath, WindowsPath
 from urllib.parse import (
     urlparse,
