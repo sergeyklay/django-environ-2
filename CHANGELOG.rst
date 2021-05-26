@@ -10,7 +10,9 @@ releases, in reverse chronological order.
 Bug Fixes
 ^^^^^^^^^
 
-* Add missed files to the packages (tests and docs).
+* Added missed files to the packages (tests and docs).
+* Don't include ``tests`` package in wheel. ``pip install django-environ-2``
+  used to install a top-level package 'tests'.
 
 
 Features
