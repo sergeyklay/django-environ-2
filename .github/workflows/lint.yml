@@ -42,3 +42,6 @@ jobs:
 
       - name: Code linting
         run: tox -e lint
+
+      - name: Check MANIFEST.in for completeness
+        run: tox -e manifest
