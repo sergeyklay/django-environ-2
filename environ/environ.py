@@ -20,6 +20,7 @@ import re
 import sys
 import urllib.parse as urlparselib
 import warnings
+from pathlib import PosixPath, WindowsPath
 from urllib.parse import (
     urlparse,
     urlunparse,
@@ -736,8 +737,14 @@ class Env:
                 return
 
         try:
-            if isinstance(env_file, str):
+            if isinstance(env_file, (str, Path)):
                 with open(env_file) as f:
+                    content = f.read()
+            elif isinstance(env_file, PosixPath):
+                with open(env_file.as_posix()) as f:
+                    content = f.read()
+            elif isinstance(env_file, WindowsPath):
+                with open(env_file.__str__()) as f:
                     content = f.read()
             else:
                 with env_file as f:
@@ -830,6 +837,7 @@ class Path:
         elif isinstance(other, str):
             if self.__root__.endswith(other):
                 return Path(self.__root__.rstrip(other))
+
         raise TypeError(
             "unsupported operand type(s) for -: '{self}' and '{other}' "
             "unless value of {self} ends with value of {other}".format(
