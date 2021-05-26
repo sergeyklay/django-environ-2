@@ -23,6 +23,13 @@ Features
   ``read_env(os.path.join(BASE_DIR, '.env'))``.
 
 
+Improvements
+^^^^^^^^^^^^
+
+* Changed additional groups of dependencies so that ``develop`` is superset
+  now for ``testing`` and ``docs``.
+
+
 ----
 
 

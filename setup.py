@@ -161,8 +161,6 @@ EXTRAS_REQUIRE = {
         'coverage[toml]>=5.0.2',  # Code coverage measurement for Python
         'pytest>=6.2.0',  # Our test framework
     ],
-    # Dependencies that are required to develop package
-    'develop': [],
     # Dependencies that are required to build documentation
     'docs': [
         'furo>=2020.12.30b24,==2020.12.*',  # Sphinx documentation theme
@@ -170,6 +168,9 @@ EXTRAS_REQUIRE = {
         'sphinx-notfound-page',  # Create a custom 404 page
     ],
 }
+
+# Dependencies that are required to develop package
+EXTRAS_REQUIRE['develop'] = EXTRAS_REQUIRE['testing'] + EXTRAS_REQUIRE['docs']
 
 # Project's URLs
 PROJECT_URLS = {
