@@ -137,7 +137,7 @@ It is possible to use of ``pathlib.Path`` objects when reading environment file 
 
     env = environ.Env()
 
-    # The four expressions below are equivalent
+    # The four lines below do the same:
     env.read_env(BASE_DIR('settings.env'))
     env.read_env(os.path.join(BASE_DIR, 'settings.env'))
     env.read_env(pathlib.Path(str(BASE_DIR)).joinpath('test_env.txt'))
