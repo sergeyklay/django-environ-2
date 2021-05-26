@@ -99,6 +99,8 @@ class TestEnv:
         assert_type_and_value(float, 33.3, self.env('FLOAT_COMMA_VAR', cast=float))
         assert_type_and_value(float, 123420333.3, self.env('FLOAT_STRANGE_VAR1', cast=float))
         assert_type_and_value(float, 123420333.3, self.env('FLOAT_STRANGE_VAR2', cast=float))
+        assert_type_and_value(float, -1.0, self.env('FLOAT_NEGATIVE_VAR1', cast=float))
+        assert_type_and_value(float, -1.0, self.env('FLOAT_NEGATIVE_VAR2', cast=float))
 
     def test_bool_true(self):
         assert_type_and_value(bool, True, self.env('BOOL_TRUE_VAR', cast=bool))

@@ -11,11 +11,6 @@
 import pkgutil
 
 
-if pkgutil.find_loader('simplejson'):
-    import simplejson as json
-else:
-    import json
-
 if pkgutil.find_loader('django'):
     from django import VERSION as DJANGO_VERSION
     from django.core.exceptions import ImproperlyConfigured

@@ -14,6 +14,7 @@ variables to configure your Django application.
 """
 
 import ast
+import json
 import logging
 import os
 import re
@@ -29,7 +30,7 @@ from urllib.parse import (
     unquote_plus,
 )
 
-from .compat import json, DJANGO_POSTGRES, REDIS_DRIVER, ImproperlyConfigured
+from .compat import DJANGO_POSTGRES, REDIS_DRIVER, ImproperlyConfigured
 
 logger = logging.getLogger(__name__)
 
@@ -171,12 +172,6 @@ class Env:
         if multiline:
             return value.replace('\\n', '\n')
         return value
-
-    def unicode(self, var, default=NOTSET):
-        """Helper for python2
-        :rtype: unicode
-        """
-        return self.get_value(var, cast=str, default=default)
 
     def bytes(self, var, default=NOTSET, encoding='utf8'):
         """
@@ -406,10 +401,10 @@ class Env:
             value = tuple([x for x in val if x])
         elif cast is float:
             # clean string
-            float_str = re.sub(r'[^\d,\.]', '', value)
+            float_str = re.sub(r'[^\d,.-]', '', value)
             # split for avoid thousand separator and different locale
             # comma/dot symbol
-            parts = re.split(r'[,\.]', float_str)
+            parts = re.split(r'[,.]', float_str)
             if len(parts) == 1:
                 float_str = parts[0]
             else:
