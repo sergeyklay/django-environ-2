@@ -7,12 +7,12 @@ releases, in reverse chronological order.
 2.1.0 (2021-XX-XX)
 ------------------
 
-Bug Fixes
-^^^^^^^^^
 
-* Added missed files to the packages (tests and docs).
-* Don't include ``tests`` package in wheel. ``pip install django-environ-2``
-  used to install a top-level package 'tests'.
+Breaking Changes
+^^^^^^^^^^^^^^^^
+
+- Removed no longer needed ``Env.unicode()`` shortcut.
+- Removed no longer needed ``simplejson`` from the ``compat`` module.
 
 
 Features
@@ -21,13 +21,21 @@ Features
 * Allows use of ``pathlib.Path`` objects when reading env from the filesystem.
   This enables use of ``env.read_env(BASE_DIR / '.env')`` instead of
   ``read_env(os.path.join(BASE_DIR, '.env'))``.
-
+* Added support for negative float strings.
 
 Improvements
 ^^^^^^^^^^^^
 
 * Changed additional groups of dependencies so that ``develop`` is superset
   now for ``testing`` and ``docs``.
+
+
+Bug Fixes
+^^^^^^^^^
+
+* Added missed files to the package contents.
+* Don't include ``tests`` package in wheel. Previously ``pip install django-environ-2``
+  used to install a top-level package ``tests``. This was fixed.
 
 
 ----

@@ -20,6 +20,7 @@ import re
 import sys
 import urllib.parse as urlparselib
 import warnings
+import json
 from pathlib import PosixPath, WindowsPath
 from urllib.parse import (
     urlparse,
@@ -29,7 +30,7 @@ from urllib.parse import (
     unquote_plus,
 )
 
-from .compat import json, DJANGO_POSTGRES, REDIS_DRIVER, ImproperlyConfigured
+from .compat import DJANGO_POSTGRES, REDIS_DRIVER, ImproperlyConfigured
 
 logger = logging.getLogger(__name__)
 
@@ -171,12 +172,6 @@ class Env:
         if multiline:
             return value.replace('\\n', '\n')
         return value
-
-    def unicode(self, var, default=NOTSET):
-        """Helper for python2
-        :rtype: unicode
-        """
-        return self.get_value(var, cast=str, default=default)
 
     def bytes(self, var, default=NOTSET, encoding='utf8'):
         """
