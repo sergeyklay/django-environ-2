@@ -49,12 +49,12 @@ jobs:
         run: tox -e build
 
   install-dev:
+    name: Verify dev environment
+    runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
-
-    name: Verify dev environment
-    runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout code
