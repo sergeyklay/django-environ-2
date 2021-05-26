@@ -89,6 +89,15 @@ jobs:
       - name: Run unit tests with coverage
         run: tox
 
+      # Use a modern Python version for combining coverage
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v2.2.2
+        with:
+          python-version: '3.10.0-beta - 3.10'
+
+      - name: Combine coverage reports
+        run: tox -e coverage-report
+
       - name: Upload coverage report
         if: success()
         env:

@@ -158,8 +158,8 @@ DEPENDENCY_LINKS = []
 EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
     'testing': [
+        'coverage[toml]>=5.0.2',  # Code coverage measurement for Python
         'pytest>=6.2.0',  # Our test framework
-        'pytest-cov>=2.11.1',  # Pytest plugin for measuring coverage
     ],
     # Dependencies that are required to develop package
     'develop': [],
