@@ -23,14 +23,14 @@ import urllib.parse as urlparselib
 import warnings
 from pathlib import PosixPath, WindowsPath
 from urllib.parse import (
+    parse_qs,
+    ParseResult,
+    unquote_plus,
     urlparse,
     urlunparse,
-    ParseResult,
-    parse_qs,
-    unquote_plus,
 )
 
-from .compat import DJANGO_POSTGRES, REDIS_DRIVER, ImproperlyConfigured
+from .compat import DJANGO_POSTGRES, ImproperlyConfigured, REDIS_DRIVER
 
 logger = logging.getLogger(__name__)
 
