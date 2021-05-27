@@ -36,6 +36,7 @@ Bug Fixes
 * Added missed files to the package contents.
 * Don't include ``tests`` package in wheel. Previously ``pip install django-environ-2``
   used to install a top-level package ``tests``. This was fixed.
+* Fixed ``db_url_config`` to work the same for all postgres aliases.
 
 
 ----

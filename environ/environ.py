@@ -23,14 +23,14 @@ import urllib.parse as urlparselib
 import warnings
 from pathlib import PosixPath, WindowsPath
 from urllib.parse import (
+    parse_qs,
+    ParseResult,
+    unquote_plus,
     urlparse,
     urlunparse,
-    ParseResult,
-    parse_qs,
-    unquote_plus,
 )
 
-from .compat import DJANGO_POSTGRES, REDIS_DRIVER, ImproperlyConfigured
+from .compat import DJANGO_POSTGRES, ImproperlyConfigured, REDIS_DRIVER
 
 logger = logging.getLogger(__name__)
 
@@ -77,6 +77,8 @@ class Env:
     BOOLEAN_TRUE_STRINGS = ('true', 'on', 'ok', 'y', 'yes', '1')
     URL_CLASS = ParseResult
     DEFAULT_DATABASE_ENV = 'DATABASE_URL'
+
+    POSTGRES_FAMILY = ['postgres', 'postgresql', 'psql', 'pgsql', 'postgis']
     DB_SCHEMES = {
         'postgres': DJANGO_POSTGRES,
         'postgresql': DJANGO_POSTGRES,
@@ -471,7 +473,7 @@ class Env:
             'PORT': _cast_int(url.port) or '',
         })
 
-        if url.scheme == 'postgres' and path.startswith('/'):
+        if url.scheme in cls.POSTGRES_FAMILY and path.startswith('/'):
             config['HOST'], config['NAME'] = path.rsplit('/', 1)
 
         if url.scheme == 'oracle' and path == '':
