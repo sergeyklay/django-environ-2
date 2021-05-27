@@ -473,7 +473,7 @@ class Env:
             'PORT': _cast_int(url.port) or '',
         })
 
-        if url.scheme in cls.POSTGRES_FAMILY  and path.startswith('/'):
+        if url.scheme in cls.POSTGRES_FAMILY and path.startswith('/'):
             config['HOST'], config['NAME'] = path.rsplit('/', 1)
 
         if url.scheme == 'oracle' and path == '':
