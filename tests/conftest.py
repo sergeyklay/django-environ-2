@@ -61,3 +61,9 @@ def volume():
 def search_url(request):
     """Return Search Engine URL."""
     return request.param
+
+
+@pytest.fixture
+def env_file():
+    """Return env file for tests.."""
+    return os.path.join(os.path.dirname(__file__), 'test_env.txt')

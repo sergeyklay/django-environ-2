@@ -18,7 +18,6 @@ import json
 import logging
 import os
 import re
-import sys
 import urllib.parse as urlparselib
 import warnings
 from pathlib import PosixPath, WindowsPath
@@ -33,6 +32,12 @@ from urllib.parse import (
 from .compat import DJANGO_POSTGRES, ImproperlyConfigured, REDIS_DRIVER
 
 logger = logging.getLogger(__name__)
+
+
+__all__ = [
+    'DJANGO_POSTGRES', 'REDIS_DRIVER',
+    'logger', 'NoValue', 'Env', 'Path',
+]
 
 
 def _cast(value):
@@ -711,36 +716,35 @@ class Env:
 
     @classmethod
     def read_env(cls, env_file=None, **overrides):
-        """Read a .env file into os.environ.
+        """Read a .env file into ENVIRON.
 
-        If not given a path to a dotenv path, does filthy magic stack
-        backtracking to find the dotenv in the same directory as the file that
-        called read_env.
+        Existing environment variables take precedent and are NOT overwritten
+        by the file content or key/value pairs given as `overrides`.
 
-        Refs:
-        - http://www.wellfireinteractive.com/blog/easier-12-factor-django/
-        - https://gist.github.com/bennylope/2999704
+        :param env_file: The path to the `.env` file your application should
+            use. If a path is not provided, `read_env` will attempt to import
+            the Django settings module and use the BASE_DIR constant to find
+            the .env file. Failing that, it will create an WARN-level log
+            message that no `.env` file was found and continue on.
+        :param **overrides: Any additional keyword arguments provided directly
+            to read_env will be added to the environment. If the key matches an
+            existing environment variable, the value will be overridden.
+
         """
         if env_file is None:
-            frame = sys._getframe()
-            env_file = os.path.join(
-                os.path.dirname(frame.f_back.f_code.co_filename),
-                '.env'
-            )
-            if not os.path.exists(env_file):
-                warnings.warn(
+            try:
+                from django.conf import settings
+                env_file = os.path.join(settings.BASE_DIR, '.env')
+            except (ImportError, NameError):
+                logger.warning(
                     "%s doesn't exist - if you're not configuring your "
-                    "environment separately, create one." % env_file)
+                    "environment separately, create one." %
+                    (env_file or 'Environment file')
+                )
                 return
 
         try:
-            if isinstance(env_file, (str, Path)):
-                with open(env_file) as f:
-                    content = f.read()
-            elif isinstance(env_file, PosixPath):
-                with open(env_file.as_posix()) as f:
-                    content = f.read()
-            elif isinstance(env_file, WindowsPath):
+            if isinstance(env_file, (str, Path, PosixPath, WindowsPath)):
                 with open(env_file.__str__()) as f:
                     content = f.read()
             else:
