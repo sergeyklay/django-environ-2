@@ -16,28 +16,28 @@ to do this, ``read_env()`` will assume there's no ``.env`` file to be found, log
 a WARN-level log message to that effect, and continue on.
 
 .. note::
-    The ``.env`` file doesn't have to be called that way. This could be for
-    example ``settings.sh``, or any other name up to you.
+   The ``.env`` file doesn't have to be called that way. This could be for
+   example ``settings.sh``, or any other name up to you.
 
 Considering the above, here are some typical use cases of ``read_env()``:
 
 .. code-block:: python
 
-    import environ
-    import os
+   import environ
+   import os
 
-    # Set the project base directory
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+   # Set the project base directory
+   BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-    # Take environment variables from .env file
-    environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+   # Take environment variables from .env file
+   environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-    # Take environment variables from settings.env file
-    environ.Env.read_env(os.path.join(BASE_DIR, 'settings.env'))
+   # Take environment variables from settings.env file
+   environ.Env.read_env(os.path.join(BASE_DIR, 'settings.env'))
 
-    # Attempt to use the django.BASE_DIR to load .env file from
-    # os.path.join(BASE_DIR, '.env').
-    environ.Env.read_env()
+   # Attempt to use the django.BASE_DIR to load .env file from
+   # os.path.join(BASE_DIR, '.env').
+   environ.Env.read_env()
 
 The following things should also be mentioned:
 
@@ -154,5 +154,5 @@ and the default value happens to start with a ``$``.  This is assumed to be a
 "proxy variable" and looked up (using the same value as default again), which
 leads to an infinite recursion.
 
-Interpolation of environment variables on read is a very risky behavior. Even if
-there's a valid use case for it. That's why it should be disabled by default.
+Interpolation of environment variables on read is a very risky behavior. Even
+if there's a valid use case for it. That's why it is disabled by default.
