@@ -96,9 +96,14 @@ You can set a multiline variable value:
 Proxy value
 ===========
 
-You can set a value prefixed by ``$`` to use as a proxy to another variable value:
+Values that being with a ``$`` may be interpolated. Pass ``interpolate=True`` to
+``environ.Env()`` to enable this feature:
 
 .. code-block:: python
+
+   import environ
+
+   env = environ.Env(interpolate=True)
 
    # BAR=FOO
    # PROXY=$BAR

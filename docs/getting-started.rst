@@ -18,7 +18,7 @@ ___________________________
 ``django-environ-2`` is a Python-only package `hosted on PyPI <https://pypi.org/project/django-environ-2/>`_.
 The recommended installation method is `pip <https://pip.pypa.io/en/stable/>`_-installing into a virtualenv:
 
-.. code-block:: console
+.. code-block:: shell
 
    $ python -m pip install django-environ-2
 
