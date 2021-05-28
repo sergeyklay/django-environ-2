@@ -86,8 +86,16 @@ class TestEnv:
         assert_type_and_value(bool, False, self.env('BOOL_FALSE_VAR2', cast=bool))
         assert_type_and_value(bool, False, self.env.bool('BOOL_FALSE_VAR'))
 
-    def test_proxied_value(self):
-        assert self.env('PROXIED_VAR') == '$STR_VAR'
+    def test_default_proxied_setting(self):
+        assert_type_and_value(str, '$STR_VAR', self.env('PROXIED_VAR'))
+        assert_type_and_value(str, '$STR_VAR', self.env('XUZ', default='$STR_VAR'))
+        assert_type_and_value(str, "'$STR_VAR'", self.env('XUZ', default="'$STR_VAR'"))
+
+    def test_enable_proxy_feature(self):
+        env = Env(interpolate=True)
+        assert_type_and_value(str, 'bar', env('PROXIED_VAR'))
+        assert_type_and_value(str, 'bar', env('XUZ', default='$STR_VAR'))
+        assert_type_and_value(str, "'$STR_VAR'", self.env('XUZ', default="'$STR_VAR'"))
 
     def test_int_list(self):
         assert_type_and_value(list, [42, 33], self.env('INT_LIST', cast=[int]))

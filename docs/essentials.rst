@@ -89,3 +89,54 @@ The following example demonstrates the above:
    assert os.environ['EMAIL'] == 'dev@acme.localhost'
 
    assert 'DEBUG' in os.environ
+
+
+Interpolate Environment Variables
+=================================
+
+An environment value or default can reference another environ value by referring
+to it with a `$`` sign. Values that being with a ``$`` can be interpolated, but
+it is turned off by default. Pass ``interpolate=True`` to ``environ.Env()`` to
+enable this feature:
+
+The following example demonstrates the above:
+
+**.env file**:
+
+.. code-block:: shell
+
+   # .env file contents
+   PROXIED_VAR=$STR_VAR
+   STR_VAR=bar
+
+**settings.py file**:
+
+.. code-block:: python
+
+   # settings.py file contents
+   import environ
+
+   # Take environment variables from .env file and enable interpolation
+   env = environ.Env(interpolate=True)
+   env.str('PROXIED_VAR')  # 'bar'
+   env.str('NON_EXISTENT_VAR', default='$STR_VAR')  # 'bar'
+
+   # Take environment variables from .env file and do not enable interpolation
+   env = environ.Env()
+   env.str('PROXIED_VAR')  # '$STR_VAR'
+   env.str('NON_EXISTENT_VAR', default='$STR_VAR')  # '$STR_VAR'
+
+
+However, expanding variables automatically on a read usually is an anti-pattern.
+Variable expansion by the shell should only be done when the value is inserted
+into the environment, but the value should be treated as opaque data. Any processing
+or interpretation of the variable should be done by the application, not by the
+access method.
+
+If you get an infinite recursion when using environ most likely you have an
+unresolved and perhaps unintentional proxy value in an environ string. For example
+``environ('DJANGO_SECRET_KEY', '$1233FJSIFWR44')`` will cause an infinite
+recursion unless you add ``interpolate=False``.
+
+Interpolation of environment variables on read is a very risky behavior. Even if
+there's a valid use case for it. That's why it should be disabled by default.

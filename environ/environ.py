@@ -154,8 +154,9 @@ class Env:
         "simple": "haystack.backends.simple_backend.SimpleEngine",
     }
 
-    def __init__(self, **scheme):
+    def __init__(self, interpolate=False, **scheme):
         self.smart_cast = True
+        self.interpolate = interpolate
         self.scheme = scheme
 
     def __call__(self, var, cast=None, default=NOTSET, parse_default=False):
@@ -345,6 +346,12 @@ class Env:
                 raise ImproperlyConfigured(error_msg)
 
             value = default
+
+        # Resolve any proxied values
+        if self.interpolate and hasattr(value, 'startswith') and \
+                value.startswith('$'):
+            value = value.lstrip('$')
+            value = self.get_value(value, cast=cast, default=default)
 
         # Smart casting
         if self.smart_cast:

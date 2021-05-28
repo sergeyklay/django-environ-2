@@ -20,11 +20,7 @@ Breaking Changes
   ``Env.read_env()`` will assume there's no ``.env`` file to be found, log a
   WARN-level log message to that effect, and continue on.
 * Make ``Env.read_env()``'s ``overrides`` argument actually override variables.
-* Removed proxy variable feature. Expanding variables automatically on a read is
-  an anti-pattern. Variable expansion by the shell should only be done when the
-  value is inserted into the environment, but the value should be treated as
-  opaque data. Any processing or interpretation of the variable should be done
-  by the application, not by the access method.
+* Disabled proxy variable feature by default.
 
 
 Features

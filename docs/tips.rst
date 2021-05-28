@@ -93,6 +93,24 @@ You can set a multiline variable value:
    World
 
 
+Proxy value
+===========
+
+Values that being with a ``$`` may be interpolated. Pass ``interpolate=True`` to
+``environ.Env()`` to enable this feature:
+
+.. code-block:: python
+
+   import environ
+
+   env = environ.Env(interpolate=True)
+
+   # BAR=FOO
+   # PROXY=$BAR
+   >>> print env.str('PROXY')
+   FOO
+
+
 Multiple env files
 ==================
 
