@@ -139,5 +139,12 @@ Similar projects
 
 There are some projects similar to ``django-environ-2`` you may be interested in:
 
-* https://github.com/joke2k/django-environ
-* https://github.com/theskumar/python-dotenv
+* `django-configurations <https://github.com/jezdez/>`_
+* `django-dotenv <https://github.com/jpadilla/django-dotenv>`_
+* `django-environ <https://github.com/joke2k/django-environ>`_
+* `dump-env <https://github.com/sobolevn/dump-env>`_
+* `dynaconf <https://github.com/rochacbruno/dynaconf>`_
+* `environs <https://github.com/sloria/environs>`_
+* `honcho <https://github.com/nickstenning/honcho>`_
+* `python-dotenv <https://github.com/theskumar/python-dotenv>`_
+
