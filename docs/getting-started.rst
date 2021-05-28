@@ -1,15 +1,19 @@
-============
+===============
+Getting Started
+===============
+
 Installation
 ============
 
+
 Requirements
-============
+------------
 
 * `Django <https://www.djangoproject.com/>`_ >= 1.11
 * `Python <https://www.python.org/>`_ >= 3.6
 
 Installing django-environ-2
-===========================
+___________________________
 
 ``django-environ-2`` is a Python-only package `hosted on PyPI <https://pypi.org/project/django-environ-2/>`_.
 The recommended installation method is `pip <https://pip.pypa.io/en/stable/>`_-installing into a virtualenv:

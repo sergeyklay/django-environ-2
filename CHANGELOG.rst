@@ -11,8 +11,14 @@ releases, in reverse chronological order.
 Breaking Changes
 ^^^^^^^^^^^^^^^^
 
-- Removed no longer needed ``Env.unicode()`` shortcut.
-- Removed no longer needed ``simplejson`` from the ``compat`` module.
+* Removed no longer needed ``Env.unicode()`` shortcut.
+* Removed no longer needed ``simplejson`` from the ``compat`` module.
+* Removed "filthy magic stack backtracking" in favor of ``django.BASE_DIR``.
+  Now ``Env.read_env()`` expects a path to the ``.env`` file. If one is not provided,
+  it will attempt to use the ``django.BASE_DIR`` constant from the Django settings
+  module. If an ImportError is encountered while it attempts to do this,
+  ``Env.read_env()`` will assume there's no ``.env`` file to be found, log a
+  WARN-level log message to that effect, and continue on.
 
 
 Features
@@ -22,6 +28,7 @@ Features
   This enables use of ``env.read_env(BASE_DIR / '.env')`` instead of
   ``read_env(os.path.join(BASE_DIR, '.env'))``.
 * Added support for negative float strings.
+
 
 Improvements
 ^^^^^^^^^^^^

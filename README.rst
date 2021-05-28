@@ -25,21 +25,25 @@ Django application with environment variables.
 .. teaser-end
 
 For that, it gives you an easy way to configure Django application using
-environment variables obtained from a file or provided by OS:
+environment variables obtained from an environment file:
 
 .. -code-begin-
 
 .. code-block:: python
 
     import environ
+    import os
 
     env = environ.Env(
         # set casting, default value
         DEBUG=(bool, False)
     )
 
-    # reading .env file
-    environ.Env.read_env()
+    # Set the project base directory
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    # Take environment variables from .env file
+    environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
     # False if not in os.environ because of casting above
     DEBUG = env('DEBUG')

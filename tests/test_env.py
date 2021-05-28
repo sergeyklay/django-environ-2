@@ -6,9 +6,8 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
-import logging
+
 import os
-import pathlib
 from urllib.parse import quote
 
 import pytest
@@ -27,36 +26,11 @@ class TestEnv:
         Setup any state tied to the execution of the given method in a
         class.  setup_method is invoked for every test method of a class.
         """
-        self.old_environ = os.environ
         os.environ = Env.ENVIRON = FakeEnv.generateData()
         self.env = Env()
 
-    def teardown_method(self, method):
-        """
-        Rollback environment variables.
-
-        Teardown any state that was previously setup with a setup_method call.
-        """
-        assert self.old_environ is not None
-        os.environ = self.old_environ
-
     def test_not_present_with_default(self):
         assert self.env('not_present', default=3) == 3
-
-    @pytest.mark.parametrize(
-        'env_file',
-        [
-            os.path.join(os.path.dirname(__file__), 'test_env.txt'),
-            Path(os.path.join(os.path.dirname(__file__), 'test_env.txt')),
-            pathlib.Path(__file__).parent.joinpath('test_env.txt'),
-            pathlib.Path(__file__).parent / 'test_env.txt'
-        ],
-    )
-    def test_read_env(self, env_file, caplog):
-        env = Env()
-        with caplog.at_level(logging.DEBUG):
-            env.read_env(env_file)
-        assert 'Read environment variables from:' in caplog.text
 
     def test_not_present_without_default(self):
         with pytest.raises(ImproperlyConfigured) as excinfo:
