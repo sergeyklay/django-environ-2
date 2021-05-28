@@ -44,7 +44,7 @@ The following things should also be mentioned:
 * The values read in from the ``.env`` file are overridden by any that already
   existed in the environment. This means that environment variables obtained
   from the ``os.environ`` will have a higher priority.
-* ``read_env()`` also takes an additional overrides list. Any additional keyword
+* ``read_env()`` also takes an additional key/value **kwargs. Any additional keyword
   arguments provided directly to ``read_env`` will be added to the environment.
   If the key matches an existing environment variable, the value will be overridden.
 * ``read_env()`` updates ``os.environ`` directly, rather than just that particular
@@ -55,7 +55,7 @@ The following example demonstrates the above:
 **.env file**:
 
 .. code-block:: shell
-
+   # .env file contents
    DJANGO_SETTINGS_MODULE=settings.prod
    DEBUG=on
 
@@ -63,18 +63,18 @@ The following example demonstrates the above:
 **settings.py file**:
 
 .. code-block:: python
+   # settings.py file contents
+   import environ
 
-    import environ
+   os.environ['DJANGO_SETTINGS_MODULE'] = 'settings.dev'
 
-    os.environ['DJANGO_SETTINGS_MODULE'] = 'settings.dev'
+   assert 'SECRET_KEY' not in os.environ
+   assert 'DEBUG' not in os.environ
 
-    assert 'SECRET_KEY' not in os.environ
-    assert 'DEBUG' not in os.environ
+   # Take environment variables from .env file
+   overrides = {'SECRET_KEY': 'Enigma'}
+   environ.Env.read_env(**overrides)
 
-    # Take environment variables from .env file
-    overrides = {'SECRET_KEY': 'Enigma'}
-    environ.Env.read_env(**overrides)
-
-    assert os.environ['SECRET_KEY'] == 'Enigma'
-    assert os.environ['DJANGO_SETTINGS_MODULE'] == 'settings.dev'
-    assert 'DEBUG' in os.environ
+   assert os.environ['SECRET_KEY'] == 'Enigma'
+   assert os.environ['DJANGO_SETTINGS_MODULE'] == 'settings.dev'
+   assert 'DEBUG' in os.environ

@@ -10,7 +10,7 @@ In order to use unsafe characters you have to encode with ``urllib.parse.encode`
 
 .. code-block:: shell
 
-    DATABASE_URL=mysql://user:%23password@127.0.0.1:3306/dbname
+   DATABASE_URL=mysql://user:%23password@127.0.0.1:3306/dbname
 
 See https://perishablepress.com/stop-using-unsafe-characters-in-urls/ for reference.
 
@@ -23,7 +23,7 @@ To disable it use ``env.smart_cast = False``.
 
 .. note::
 
-    The next major release will disable it by default.
+   The next major release will disable it by default.
 
 
 Multiple redis cache locations
@@ -33,7 +33,7 @@ For redis cache, `multiple master/slave or shard locations <http://niwinz.github
 
 .. code-block:: shell
 
-    CACHE_URL='rediscache://master:6379,slave1:6379,slave2:6379/1'
+   CACHE_URL='rediscache://master:6379,slave1:6379,slave2:6379/1'
 
 
 Email settings
@@ -43,13 +43,13 @@ In order to set email configuration for django you can use this code:
 
 .. code-block:: python
 
-    # The email() method is an alias for email_url().
-    EMAIL_CONFIG = env.email(
-        'EMAIL_URL',
-        default='smtp://user:password@localhost:25'
-    )
+   # The email() method is an alias for email_url().
+   EMAIL_CONFIG = env.email(
+       'EMAIL_URL',
+       default='smtp://user:password@localhost:25'
+   )
 
-    vars().update(EMAIL_CONFIG)
+   vars().update(EMAIL_CONFIG)
 
 
 SQLite urls
@@ -69,15 +69,15 @@ Some settings such as Django's ``ADMINS`` make use of nested lists. You can use 
 
 .. code-block:: python
 
-    # DJANGO_ADMINS=John:john@admin.com,Jane:jane@admin.com
-    ADMINS = [x.split(':') for x in env.list('DJANGO_ADMINS')]
+   # DJANGO_ADMINS=John:john@admin.com,Jane:jane@admin.com
+   ADMINS = [x.split(':') for x in env.list('DJANGO_ADMINS')]
 
-    # or use more specific function
+   # or use more specific function
 
-    from email.utils import getaddresses
+   from email.utils import getaddresses
 
-    # DJANGO_ADMINS=Full Name <email-with-name@example.com>,anotheremailwithoutname@example.com
-    ADMINS = getaddresses([env('DJANGO_ADMINS')])
+   # DJANGO_ADMINS=Full Name <email-with-name@example.com>,anotheremailwithoutname@example.com
+   ADMINS = getaddresses([env('DJANGO_ADMINS')])
 
 
 Multiline value
@@ -87,10 +87,10 @@ You can set a multiline variable value:
 
 .. code-block:: python
 
-    # MULTILINE_TEXT=Hello\\nWorld
-    >>> print env.str('MULTILINE_TEXT', multiline=True)
-    Hello
-    World
+   # MULTILINE_TEXT=Hello\\nWorld
+   >>> print env.str('MULTILINE_TEXT', multiline=True)
+   Hello
+   World
 
 
 Proxy value
@@ -100,10 +100,10 @@ You can set a value prefixed by ``$`` to use as a proxy to another variable valu
 
 .. code-block:: python
 
-    # BAR=FOO
-    # PROXY=$BAR
-    >>> print env.str('PROXY')
-    FOO
+   # BAR=FOO
+   # PROXY=$BAR
+   >>> print env.str('PROXY')
+   FOO
 
 
 Multiple env files
@@ -113,8 +113,8 @@ It is possible to have multiple env files and select one using environment varia
 
 .. code-block:: python
 
-    env = environ.Env()
-    env.read_env(env.str('ENV_PATH', '.env'))
+   env = environ.Env()
+   env.read_env(env.str('ENV_PATH', '.env'))
 
 Now ``ENV_PATH=other-env ./manage.py runserver`` uses ``other-env`` while ``./manage.py runserver`` uses ``.env``.
 
@@ -126,19 +126,19 @@ It is possible to use of ``pathlib.Path`` objects when reading environment file 
 
 .. code-block:: python
 
-    import os
-    import pathlib
+   import os
+   import pathlib
 
-    import environ
+   import environ
 
 
-    # Build paths inside the project like this: BASE_DIR('subdir').
-    BASE_DIR = environ.Path(__file__) - 3
+   # Build paths inside the project like this: BASE_DIR('subdir').
+   BASE_DIR = environ.Path(__file__) - 3
 
-    env = environ.Env()
+   env = environ.Env()
 
-    # The four lines below do the same:
-    env.read_env(BASE_DIR('.env'))
-    env.read_env(os.path.join(BASE_DIR, '.env'))
-    env.read_env(pathlib.Path(str(BASE_DIR)).joinpath('.env'))
-    env.read_env(pathlib.Path(str(BASE_DIR)) / '.env')
+   # The four lines below do the same:
+   env.read_env(BASE_DIR('.env'))
+   env.read_env(os.path.join(BASE_DIR, '.env'))
+   env.read_env(pathlib.Path(str(BASE_DIR)).joinpath('.env'))
+   env.read_env(pathlib.Path(str(BASE_DIR)) / '.env')

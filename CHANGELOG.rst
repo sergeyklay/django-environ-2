@@ -33,8 +33,8 @@ Features
 Improvements
 ^^^^^^^^^^^^
 
-* Changed additional groups of dependencies so that ``develop`` is superset
-  now for ``testing`` and ``docs``.
+* Changed additional groups of dependencies declared in ``setup.py`` so that
+  ``develop`` is superset now for ``testing`` and ``docs``.
 
 
 Bug Fixes
