@@ -95,7 +95,7 @@ Interpolate Environment Variables
 =================================
 
 An environment value or default can reference another environ value by referring
-to it with a `$`` sign. Values that being with a ``$`` can be interpolated, but
+to it with a ``$`` sign. Values that being with a ``$`` can be interpolated, but
 it is turned off by default. Pass ``interpolate=True`` to ``environ.Env()`` to
 enable this feature:
 
@@ -134,9 +134,25 @@ or interpretation of the variable should be done by the application, not by the
 access method.
 
 If you get an infinite recursion when using environ most likely you have an
-unresolved and perhaps unintentional proxy value in an environ string. For example
-``environ('DJANGO_SECRET_KEY', '$1233FJSIFWR44')`` will cause an infinite
-recursion unless you add ``interpolate=False``.
+unresolved and perhaps unintentional proxy value in an environ string. For example,
+consider the following use case:
+
+**settings.py file**:
+
+.. code-block:: python
+
+   # settings.py file contents
+   import environ
+
+   # Take environment variables from .env file and enable interpolation
+   env = environ.Env(interpolate=True)
+
+   env('not_present', default='$@u#c4w=%k')
+
+In the example above the environment variable ``not_present`` does not exist
+and the default value happens to start with a ``$``.  This is assumed to be a
+"proxy variable" and looked up (using the same value as default again), which
+leads to an infinite recursion.
 
 Interpolation of environment variables on read is a very risky behavior. Even if
 there's a valid use case for it. That's why it should be disabled by default.
