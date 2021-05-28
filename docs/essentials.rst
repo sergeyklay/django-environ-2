@@ -55,6 +55,7 @@ The following example demonstrates the above:
 **.env file**:
 
 .. code-block:: shell
+
    # .env file contents
    DJANGO_SETTINGS_MODULE=settings.prod
    EMAIL=sales@acme.com
@@ -64,6 +65,7 @@ The following example demonstrates the above:
 **settings.py file**:
 
 .. code-block:: python
+
    # settings.py file contents
    import environ
 
