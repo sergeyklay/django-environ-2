@@ -87,7 +87,7 @@ class TestEnv:
         assert_type_and_value(bool, False, self.env.bool('BOOL_FALSE_VAR'))
 
     def test_proxied_value(self):
-        assert self.env('PROXIED_VAR') == 'bar'
+        assert self.env('PROXIED_VAR') == '$STR_VAR'
 
     def test_int_list(self):
         assert_type_and_value(list, [42, 33], self.env('INT_LIST', cast=[int]))

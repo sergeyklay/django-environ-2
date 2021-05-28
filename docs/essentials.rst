@@ -42,8 +42,8 @@ Considering the above, here are some typical use cases of ``read_env()``:
 The following things should also be mentioned:
 
 * The values read in from the ``.env`` file are overridden by any that already
-  existed in the environment. This means that environment variables obtained
-  from the ``os.environ`` will have a higher priority.
+  existed in the environment. This means that variables that are already defined
+  in the environment take precedence over those in your ``.env`` file.
 * ``read_env()`` also takes an additional overrides list. Any additional keyword
   arguments provided directly to ``read_env`` will be added to the environment.
   If the key matches an existing environment variable, the value will be overridden.
@@ -68,6 +68,7 @@ The following example demonstrates the above:
 
    # settings.py file contents
    import environ
+   import os
 
    os.environ['DJANGO_SETTINGS_MODULE'] = 'settings.dev'
 
@@ -80,8 +81,7 @@ The following example demonstrates the above:
        'EMAIL': 'dev@acme.localhost',
    }
 
-   # Take environment variables from .env file using
-   # os.path.join(BASE_DIR, '.env'). Also take the overrides list.
+   # Take environment variables from .env file and the overrides list.
    environ.Env.read_env(**overrides)
 
    assert os.environ['SECRET_KEY'] == 'Enigma'

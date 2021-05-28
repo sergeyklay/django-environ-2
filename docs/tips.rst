@@ -93,19 +93,6 @@ You can set a multiline variable value:
    World
 
 
-Proxy value
-===========
-
-You can set a value prefixed by ``$`` to use as a proxy to another variable value:
-
-.. code-block:: python
-
-   # BAR=FOO
-   # PROXY=$BAR
-   >>> print env.str('PROXY')
-   FOO
-
-
 Multiple env files
 ==================
 

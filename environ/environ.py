@@ -346,11 +346,6 @@ class Env:
 
             value = default
 
-        # Resolve any proxied values
-        if hasattr(value, 'startswith') and value.startswith('$'):
-            value = value.lstrip('$')
-            value = self.get_value(value, cast=cast, default=default)
-
         # Smart casting
         if self.smart_cast:
             if cast is None and default is not None and \
