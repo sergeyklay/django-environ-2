@@ -18,7 +18,6 @@ import json
 import logging
 import os
 import re
-import sys
 import urllib.parse as urlparselib
 import warnings
 from pathlib import PosixPath, WindowsPath
@@ -33,6 +32,12 @@ from urllib.parse import (
 from .compat import DJANGO_POSTGRES, ImproperlyConfigured, REDIS_DRIVER
 
 logger = logging.getLogger(__name__)
+
+
+__all__ = [
+    'DJANGO_POSTGRES', 'REDIS_DRIVER',
+    'logger', 'NoValue', 'Env', 'Path',
+]
 
 
 def _cast(value):
@@ -736,13 +741,7 @@ class Env:
                 return
 
         try:
-            if isinstance(env_file, (str, Path)):
-                with open(env_file) as f:
-                    content = f.read()
-            elif isinstance(env_file, PosixPath):
-                with open(env_file.as_posix()) as f:
-                    content = f.read()
-            elif isinstance(env_file, WindowsPath):
+            if isinstance(env_file, (str, Path, PosixPath, WindowsPath)):
                 with open(env_file.__str__()) as f:
                     content = f.read()
             else:

@@ -16,6 +16,12 @@ Modules:
     compat
     environ
 
+Classes:
+
+    Env
+    NoValue
+    Path
+
 Misc variables:
 
     __copyright__
@@ -27,6 +33,9 @@ Misc variables:
     __maintainer_email__
     __url__
     __description__
+    logger
+    DJANGO_POSTGRES
+    REDIS_DRIVER
 
 Refer to the `documentation <https://django-environ-2.readthedocs.io/>`_
 for details on the use of this package.
