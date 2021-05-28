@@ -2,6 +2,7 @@
 Essentials
 ==========
 
+
 ``Env.read_env()``
 ==================
 
@@ -29,21 +30,24 @@ Considering the above, here are some typical use cases of ``read_env()``:
    # Set the project base directory
    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+   env = environ.Env()
+
    # Take environment variables from .env file
-   environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+   env.read_env(os.path.join(BASE_DIR, '.env'))
 
    # Take environment variables from settings.env file
-   environ.Env.read_env(os.path.join(BASE_DIR, 'settings.env'))
+   env.read_env(os.path.join(BASE_DIR, 'settings.env'))
 
    # Attempt to use the django.BASE_DIR to load .env file from
    # os.path.join(BASE_DIR, '.env').
-   environ.Env.read_env()
+   env.read_env()
 
 The following things should also be mentioned:
 
-* The values read in from the ``.env`` file are overridden by any that already
-  existed in the environment. This means that variables that are already defined
-  in the environment take precedence over those in your ``.env`` file.
+* By default, the values read in from the ``.env`` file are overridden by any
+  that already existed in the environment. This means that variables that are
+  already defined in the environment take precedence over those in your ``.env``
+  file.
 * ``read_env()`` also takes an additional overrides list. Any additional keyword
   arguments provided directly to ``read_env`` will be added to the environment.
   If the key matches an existing environment variable, the value will be overridden.
@@ -75,20 +79,53 @@ The following example demonstrates the above:
    assert 'SECRET_KEY' not in os.environ
    assert 'DEBUG' not in os.environ
 
-
    overrides = {
        'SECRET_KEY': 'Enigma',
        'EMAIL': 'dev@acme.localhost',
    }
 
+   env = environ.Env()
+
    # Take environment variables from .env file and the overrides list.
-   environ.Env.read_env(**overrides)
+   env.read_env(**overrides)
 
    assert os.environ['SECRET_KEY'] == 'Enigma'
    assert os.environ['DJANGO_SETTINGS_MODULE'] == 'settings.dev'
    assert os.environ['EMAIL'] == 'dev@acme.localhost'
 
    assert 'DEBUG' in os.environ
+
+Additionally, ``read_env()`` takes an optional ``overwrite`` parameter, which is
+set to ``False`` by default. Setting it to ``True`` will force an overwrite of
+existing environment variables. This is illustrated by the following example:
+
+**.env file**:
+
+.. code-block:: shell
+
+   # .env file contents
+   DB_NAME=dev_db
+   DB_USER=dev_user
+
+
+**settings.py file**:
+
+.. code-block:: python
+
+   # settings.py file contents
+   import environ
+   import os
+
+   os.environ['DB_NAME'] = 'acme_prod'
+   os.environ['DB_USER'] = 'acme'
+   env = environ.Env()
+
+   # Take environment variables from .env file and
+   # overwrite existing environment variables
+   env.read_env(overwrite=True)
+
+   assert os.environ['DB_NAME'] == 'dev_db'
+   assert os.environ['DB_USER'] == 'dev_user'
 
 
 Interpolate Environment Variables

@@ -83,3 +83,16 @@ def test_read_env_no_file(caplog):
         "your environment separately, create one."
     )
     assert expected_message in caplog.text
+
+
+def test_read_and_overwrite_env(simple_env_file, monkeypatch):
+    """Make sure we able overwrite existing environment variables."""
+    monkeypatch.setenv('DB_NAME', 'user')
+    monkeypatch.setenv('DB_USER', 'password')
+
+    env = Env()
+
+    env.read_env(env_file=simple_env_file, overwrite=True)
+
+    assert os.environ['DB_NAME'] == 'dev_db'
+    assert os.environ['DB_USER'] == 'dev_user'

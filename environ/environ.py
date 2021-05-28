@@ -59,6 +59,17 @@ def _cast_urlstr(v):
     return unquote_plus(v) if isinstance(v, str) else v
 
 
+def _make_setenv(env, overwrite=False):
+    """
+    Return lambda to set environ.
+
+    Use setdefault unless overwrite is specified.
+    """
+    if overwrite:
+        return lambda k, v: env.update({k: str(v)})
+    return lambda k, v: env.setdefault(k, str(v))
+
+
 class NoValue:
 
     def __repr__(self):
@@ -717,7 +728,7 @@ class Env:
         return config
 
     @classmethod
-    def read_env(cls, env_file=None, **overrides):
+    def read_env(cls, env_file=None, overwrite=False, **overrides):
         """Read a .env file into ENVIRON.
 
         Existing environment variables take precedent and are NOT overwritten
@@ -731,10 +742,11 @@ class Env:
             the Django settings module and use the BASE_DIR constant to find
             the .env file. Failing that, it will create an WARN-level log
             message that no `.env` file was found and continue on.
+        :param overwrite: True will force an overwrite of existing environment
+            variables.
         :param **overrides: Any additional keyword arguments provided directly
             to read_env will be added to the environment. If the key matches an
             existing environment variable, the value will be overridden.
-
         """
         if env_file is None:
             try:
@@ -762,6 +774,7 @@ class Env:
             return
 
         logger.debug('Read environment variables from: {}'.format(env_file))
+        setenv = _make_setenv(cls.ENVIRON, overwrite=overwrite)
 
         for line in content.splitlines():
             m1 = re.match(r'\A(?:export )?([A-Za-z_0-9]+)=(.*)\Z', line)
@@ -773,7 +786,7 @@ class Env:
                 m3 = re.match(r'\A"(.*)"\Z', val)
                 if m3:
                     val = re.sub(r'\\(.)', r'\1', m3.group(1))
-                cls.ENVIRON.setdefault(key, str(val))
+                setenv(key, val)
 
         # set overrides
         for key, value in overrides.items():
