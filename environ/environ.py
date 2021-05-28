@@ -441,9 +441,9 @@ class Env:
         Support currently exists for PostgreSQL, PostGIS, MySQL, Oracle and
         SQLite.
 
-        SQLite connects to file based databases. The same URL format is used,
+        SQLite connects to file based databases.  The same URL format is used,
         omitting the hostname, and using the "file" portion as the filename of
-        the database. This has the effect of four slashes being present for an
+        the database.  This has the effect of four slashes being present for an
         absolute file path.
         """
         if not isinstance(url, cls.URL_CLASS):
@@ -731,22 +731,22 @@ class Env:
     def read_env(cls, env_file=None, overwrite=False, **overrides):
         """Read a .env file into ENVIRON.
 
-        Existing environment variables take precedent and are NOT overwritten
-        by the file content.
+        By default, existing environment variables take precedent and are not
+        overwritten by the file content.
 
-        Key/value pairs given as `overrides` DO overwrite existing variables.
+        Key/value pairs given as `overrides` do overwrite existing variables.
         Keep in mind, that variable names are case sensitive, when overriding.
 
         :param env_file: The path to the `.env` file your application should
-            use. If a path is not provided, `read_env` will attempt to import
+            use.  If a path is not provided, `read_env` will attempt to import
             the Django settings module and use the BASE_DIR constant to find
-            the .env file. Failing that, it will create an WARN-level log
+            the .env file.  Failing that, it will create an WARN-level log
             message that no `.env` file was found and continue on.
-        :param overwrite: True will force an overwrite of existing environment
-            variables.
+        :param overwrite: Whether to override the system environment variables
+            with the variables in `.env` file.  Defaults to `False`.
         :param **overrides: Any additional keyword arguments provided directly
-            to read_env will be added to the environment. If the key matches an
-            existing environment variable, the value will be overridden.
+            to read_env will be added to the environment.  If the key matches
+            an existing environment variable, the value will be overridden.
         """
         if env_file is None:
             try:
