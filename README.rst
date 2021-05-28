@@ -25,7 +25,7 @@ Django application with environment variables.
 .. teaser-end
 
 For that, it gives you an easy way to configure Django application using
-environment variables obtained from an environment file:
+environment variables obtained from an environment file and provided by the OS:
 
 .. -code-begin-
 
