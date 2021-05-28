@@ -30,6 +30,7 @@ Features
   This enables use of ``env.read_env(BASE_DIR / '.env')`` instead of
   ``read_env(os.path.join(BASE_DIR, '.env'))``.
 * Added support for negative float strings.
+* Added ability to overwrite existing environment variables in ``read_env()``.
 
 
 Improvements
