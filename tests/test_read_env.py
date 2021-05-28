@@ -15,15 +15,15 @@ import pytest
 from environ import Env, Path
 
 
-def test_read_env_priority(env_file, monkeypatch):
+def test_read_env_priority(simple_env_file, monkeypatch):
     """Values obtained from the os.environ should have a higher priority."""
-    monkeypatch.setenv('PATH_VAR', '/tmp')
+    monkeypatch.setenv('EMAIL', 'dev@acme.localhost')
 
     env = Env()
-    env.read_env(env_file, PATH_VAR='/var')
+    env.read_env(simple_env_file)
 
-    # In env_file: PATH_VAR=/home/dev
-    assert os.environ['PATH_VAR'] == '/tmp'
+    # In env_file: EMAIL=sales@acme.com
+    assert os.environ['EMAIL'] == 'dev@acme.localhost'
 
 
 def test_read_env_overrides(env_file):
@@ -39,15 +39,15 @@ def test_read_env_overrides(env_file):
     assert os.environ['SECRET'] == 'top_secret'
 
 
-def test_read_env_overrides_os(env_file, monkeypatch):
-    """Additional keywords should not override vars from the os.environ."""
+def test_read_env_override_os(env_file, monkeypatch):
+    """Additional keywords should override vars from the os.environ."""
     monkeypatch.setenv('SECRET_KEY', 'enigma')
     env = Env()
 
     env.read_env(env_file=env_file, SECRET_KEY='top_secret')
 
-    assert env.ENVIRON['SECRET_KEY'] == 'enigma'
-    assert os.environ['SECRET_KEY'] == 'enigma'
+    assert env.ENVIRON['SECRET_KEY'] == 'top_secret'
+    assert os.environ['SECRET_KEY'] == 'top_secret'
 
 
 @pytest.mark.parametrize(
