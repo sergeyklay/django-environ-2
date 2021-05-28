@@ -719,7 +719,10 @@ class Env:
         """Read a .env file into ENVIRON.
 
         Existing environment variables take precedent and are NOT overwritten
-        by the file content or key/value pairs given as `overrides`.
+        by the file content.
+
+        Key/value pairs given as `overrides` DO overwrite existing variables.
+        Keep in mind, that variable names are case sensitive, when overriding.
 
         :param env_file: The path to the `.env` file your application should
             use. If a path is not provided, `read_env` will attempt to import
@@ -770,9 +773,9 @@ class Env:
                     val = re.sub(r'\\(.)', r'\1', m3.group(1))
                 cls.ENVIRON.setdefault(key, str(val))
 
-        # set defaults
+        # set overrides
         for key, value in overrides.items():
-            cls.ENVIRON.setdefault(key, value)
+            cls.ENVIRON[key] = value
 
 
 class Path:

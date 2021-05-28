@@ -263,10 +263,7 @@ class TestFileEnv(TestEnv):
         super().setup_method(method)
 
         Env.ENVIRON = {}
-        self.env.read_env(
-            Path(__file__, is_file=True)('test_env.txt'),
-            PATH_VAR=Path(__file__, is_file=True).__root__
-        )
+        self.env.read_env(Path(__file__, is_file=True)('test_env.txt'))
 
 
 class TestSubClass(TestEnv):
