@@ -28,7 +28,7 @@ The recommended installation method is `pip <https://pip.pypa.io/en/stable/>`_-i
 
 Then create a ``.env`` file. The file format can be understood from the example below:
 
-.. code-block:: bash
+.. code-block:: shell
 
     DEBUG=on
     SECRET_KEY=your-secret-key
@@ -55,7 +55,7 @@ The master of all the material is the Git repository at https://github.com/serge
 So, can also install the latest unreleased development version directly from the ``master`` branch on GitHub.
 It is a work-in-progress of a future stable release so the experience might be not as smooth.:
 
-.. code-block:: bash
+.. code-block:: shell
 
    $ pip install -e git://github.com/sergeyklay/django-environ-2.git#egg=django-environ-2
    # OR

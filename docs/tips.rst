@@ -8,7 +8,7 @@ Using unsafe characters in URLs
 
 In order to use unsafe characters you have to encode with ``urllib.parse.encode`` before you set into ``.env`` file.
 
-.. code-block:: bash
+.. code-block:: shell
 
     DATABASE_URL=mysql://user:%23password@127.0.0.1:3306/dbname
 
@@ -31,7 +31,7 @@ Multiple redis cache locations
 
 For redis cache, `multiple master/slave or shard locations <http://niwinz.github.io/django-redis/latest/#_pluggable_clients>`_ can be configured as follows:
 
-.. code-block:: bash
+.. code-block:: shell
 
     CACHE_URL='rediscache://master:6379,slave1:6379,slave2:6379/1'
 

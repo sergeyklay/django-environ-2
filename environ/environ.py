@@ -718,6 +718,9 @@ class Env:
     def read_env(cls, env_file=None, **overrides):
         """Read a .env file into ENVIRON.
 
+        Existing environment variables take precedent and are NOT overwritten
+        by the file content or key/value pairs given as `overrides`.
+
         :param env_file: The path to the `.env` file your application should
             use. If a path is not provided, `read_env` will attempt to import
             the Django settings module and use the BASE_DIR constant to find
