@@ -30,6 +30,14 @@ Considering the above, here are some typical use cases of ``read_env()``:
    # Set the project base directory
    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+   # Setting 'settings.BASE_DIR' at early stage to prevent error like:
+   #     AttributeError: 'Settings' object has no attribute 'BASE_DIR'
+   # when calling 'environ.Env()' without specifying 'env_file'.
+   #
+   # This can also be avoided by calling 'environ.Env()' as follows:
+   #    env = environ.Env(BASE_DIR / '.env')
+   settings.BASE_DIR = BASE_DIR
+
    env = environ.Env()
 
    # Take environment variables from .env file

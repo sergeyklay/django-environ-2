@@ -15,7 +15,7 @@ Breaking Changes
 * Removed no longer needed ``simplejson`` from the ``compat`` module.
 * Removed "filthy magic stack backtracking" in favor of ``django.BASE_DIR``.
   Now ``Env.read_env()`` expects a path to the ``.env`` file. If one is not provided,
-  it will attempt to use the ``django.BASE_DIR`` constant from the Django settings
+  it will attempt to use the ``django.BASE_DIR`` constant from the Django ``settings``
   module. If an ImportError is encountered while it attempts to do this,
   ``Env.read_env()`` will assume there's no ``.env`` file to be found, log a
   WARN-level log message to that effect, and continue on.
@@ -46,7 +46,7 @@ Bug Fixes
 * Added missed files to the package contents.
 * Don't include ``tests`` package in wheel. Previously ``pip install django-environ-2``
   used to install a top-level package ``tests``. This was fixed.
-* Fixed ``db_url_config`` to work the same for all postgres aliases.
+* Fixed ``db_url_config`` to work the same for all Postgres aliases.
 
 
 ----

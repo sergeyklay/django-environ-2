@@ -36,7 +36,7 @@ environment variables obtained from an environment file and provided by the OS:
 
    env = environ.Env(
        # set casting, default value
-        DEBUG=(bool, False)
+       DEBUG=(bool, False)
    )
 
    # Set the project base directory
