@@ -4,6 +4,19 @@ Changelog
 This file contains a brief summary of new features and dependency changes or
 releases, in reverse chronological order.
 
+
+2.1.1 (2021-XX-XX)
+------------------
+
+Bug Fixes
+^^^^^^^^^
+
+* Catch ``AttributeError`` when calling ``Env.read_env()`` if there is no
+
+
+----
+
+
 2.1.0 (2021-05-29)
 ------------------
 
@@ -13,12 +26,12 @@ Breaking Changes
 
 * Removed no longer needed ``Env.unicode()`` shortcut.
 * Removed no longer needed ``simplejson`` from the ``compat`` module.
-* Removed "filthy magic stack backtracking" in favor of ``django.BASE_DIR``.
+* Removed "filthy magic stack backtracking" in favor of ``django.conf.settings.BASE_DIR``.
   Now ``Env.read_env()`` expects a path to the ``.env`` file. If one is not provided,
-  it will attempt to use the ``django.BASE_DIR`` constant from the Django ``settings``
-  module. If an ImportError is encountered while it attempts to do this,
-  ``Env.read_env()`` will assume there's no ``.env`` file to be found, log a
-  WARN-level log message to that effect, and continue on.
+  it will attempt to use the ``BASE_DIR`` constant from the Django ``settings``
+  module. If one of ``AttributeError``, ``ImportError`` or  ``NameError`` errors
+  encountered while it attempts to do this, ``Env.read_env()`` will assume there's no
+  ``.env`` file to be found, log a WARN-level log message to that effect, and continue on.
 * Make ``Env.read_env()``'s ``overrides`` argument actually override variables.
 * Disabled proxy variable feature by default.
 

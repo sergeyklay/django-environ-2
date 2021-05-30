@@ -11,10 +11,11 @@ This method is responsible for reading key-value pairs from the ``.env`` file
 and adding them to environment variables.
 
 ``read_env()`` expects a path to the ``.env`` file. If one is not provided, it
-will attempt to use the ``django.BASE_DIR`` constant from the Django ``settings``
-module. If an ``ImportError`` or ``NameError`` is encountered while it attempts
-to do this, ``read_env()`` will assume there's no ``.env`` file to be found, log
-a WARN-level log message to that effect, and continue on.
+will attempt to use the ``BASE_DIR`` constant from the Django ``settings``
+module. If one of ``AttributeError``, ``ImportError`` or  ``NameError`` errors
+encountered while it attempts to do this, ``Env.read_env()`` will assume there's
+no ``.env`` file to be found, log a WARN-level log message to that effect, and
+continue on.
 
 .. note::
    The ``.env`` file doesn't have to be called that way. This could be for
@@ -26,29 +27,34 @@ Considering the above, here are some typical use cases of ``read_env()``:
 
    import environ
    import os
+   import pathlib
 
    # Set the project base directory
    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
    # Setting 'settings.BASE_DIR' at early stage to prevent error like:
    #     AttributeError: 'Settings' object has no attribute 'BASE_DIR'
-   # when calling 'environ.Env()' without specifying 'env_file'.
+   # when calling 'Env.read_env()' without specifying 'env_file'.
    #
-   # This can also be avoided by calling 'environ.Env()' as follows:
-   #    env = environ.Env(BASE_DIR / '.env')
+   # This can also be avoided by calling 'Env.read_env()' as follows:
+   #    env.read_env(BASE_DIR / '.env')
    settings.BASE_DIR = BASE_DIR
 
    env = environ.Env()
 
-   # Take environment variables from .env file
+   # Attempt to use the django.conf.settings.BASE_DIR to load .env
+   # file from os.path.join(BASE_DIR, '.env').
+   env.read_env()
+
+   # Take environment variables from '.env' file using str object.
    env.read_env(os.path.join(BASE_DIR, '.env'))
 
-   # Take environment variables from settings.env file
+   # Take environment variables from specified 'settings.env' file.
    env.read_env(os.path.join(BASE_DIR, 'settings.env'))
 
-   # Attempt to use the django.BASE_DIR to load .env file from
-   # os.path.join(BASE_DIR, '.env').
-   env.read_env()
+   # Take environment variables from '.env' file using pathlib's Path
+   BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
+   env.read_env(BASE_DIR / '.env')
 
 The following things should also be mentioned:
 
