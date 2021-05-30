@@ -85,6 +85,21 @@ def test_read_env_no_file(caplog):
     assert expected_message in caplog.text
 
 
+def test_read_env_using_base_path(simple_env_file, monkeypatch):
+    """Make sure we able read .env file using 'django.settings.BASE_DIR'."""
+    from django.conf import settings
+
+    settings.configure()
+    settings.BASE_DIR = os.path.dirname(simple_env_file)
+
+    env = Env()
+    env.read_env()
+
+    assert os.environ['TEST_ENV_EMAIL'] == 'foo@acme.com'
+    assert os.environ['TEST_ENV_NAME'] == 'John'
+    assert os.environ['TEST_ENV_SUBJECT'] == 'Hello'
+
+
 def test_read_and_overwrite_env(simple_env_file, monkeypatch):
     """Make sure we able overwrite existing environment variables."""
     monkeypatch.setenv('DB_NAME', 'user')
