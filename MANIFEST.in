@@ -18,6 +18,7 @@ graft .github
 # during the package installation.
 recursive-include tests *.py
 recursive-include tests *.txt
+recursive-include tests .env
 include tox.ini
 
 # All files in the sdist with a .pyc, .pyo, or .pyd extension will be removed
