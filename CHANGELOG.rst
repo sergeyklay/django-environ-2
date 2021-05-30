@@ -15,6 +15,12 @@ Bug Fixes
   ``django.conf.settings.BASE_DIR`` variable.
 
 
+Improved Documentation
+^^^^^^^^^^^^^^^^^^^^^^
+
+* Improved documentation regarding ``Env.read_env()``.
+
+
 ----
 
 

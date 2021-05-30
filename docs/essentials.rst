@@ -75,7 +75,7 @@ The following example demonstrates the above:
 .. code-block:: shell
 
    # .env file contents
-   DJANGO_SETTINGS_MODULE=settings.prod
+   FOO=buz
    EMAIL=sales@acme.com
    DEBUG=on
 
@@ -88,7 +88,7 @@ The following example demonstrates the above:
    import environ
    import os
 
-   os.environ['DJANGO_SETTINGS_MODULE'] = 'settings.dev'
+   os.environ['FOO'] = 'bar'
 
    assert 'SECRET_KEY' not in os.environ
    assert 'DEBUG' not in os.environ
@@ -101,10 +101,10 @@ The following example demonstrates the above:
    env = environ.Env()
 
    # Take environment variables from .env file and the overrides list.
-   env.read_env(**overrides)
+   env.read_env('/path/to/.env', **overrides)
 
+   assert os.environ['FOO'] == 'bar'
    assert os.environ['SECRET_KEY'] == 'Enigma'
-   assert os.environ['DJANGO_SETTINGS_MODULE'] == 'settings.dev'
    assert os.environ['EMAIL'] == 'dev@acme.localhost'
 
    assert 'DEBUG' in os.environ
@@ -136,7 +136,7 @@ existing environment variables. This is illustrated by the following example:
 
    # Take environment variables from .env file and
    # overwrite existing environment variables
-   env.read_env(overwrite=True)
+   env.read_env('/path/to/.env', overwrite=True)
 
    assert os.environ['DB_NAME'] == 'dev_db'
    assert os.environ['DB_USER'] == 'dev_user'
