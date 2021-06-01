@@ -14,14 +14,13 @@ on:
       - master
       - 'feature/**'
       - 'release/**'
-      - 'hotfix/**'
+      - 'fix/**'
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
 
   pull_request:
     branches:
       - master
-      - 'v[0-9]+.[0-9]+.x'
 
 jobs:
   build:
