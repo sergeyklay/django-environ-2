@@ -111,3 +111,12 @@ def test_read_and_overwrite_env(simple_env_file, monkeypatch):
 
     assert os.environ['DB_NAME'] == 'dev_db'
     assert os.environ['DB_USER'] == 'dev_user'
+
+
+def test_read_env_using_encoding(unicode_env_file):
+    """Read a file with Unicode-encoded comments."""
+    env = Env()
+    env.read_env(env_file=unicode_env_file, encoding='utf-8')
+
+    assert os.environ['SESSION_COOKIE_SECURE'] == 'True'
+    assert env('SESSION_COOKIE_SECURE', cast=bool) is True

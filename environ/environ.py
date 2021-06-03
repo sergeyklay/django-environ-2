@@ -728,7 +728,7 @@ class Env:
         return config
 
     @classmethod
-    def read_env(cls, env_file=None, overwrite=False, **overrides):
+    def read_env(cls, env_file=None, overwrite=False, encoding=None, **overrides):
         """Read a .env file into ENVIRON.
 
         By default, existing environment variables take precedent and are not
@@ -744,6 +744,9 @@ class Env:
             message that no `.env` file was found and continue on.
         :param overwrite: Whether to override the system environment variables
             with the variables in `.env` file.  Defaults to `False`.
+        :param encoding: The name of the encoding used to decode or encode the
+            file. If is not specified the encoding used is platform
+            dependent.
         :param **overrides: Any additional keyword arguments provided directly
             to read_env will be added to the environment.  If the key matches
             an existing environment variable, the value will be overridden.

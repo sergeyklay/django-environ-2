@@ -8,6 +8,12 @@ releases, in reverse chronological order.
 2.1.1 (2021-XX-XX)
 ------------------
 
+Improvements
+^^^^^^^^^^^^
+
+* Provided ability to read `.env` file contents using custom encoding.
+
+
 Bug Fixes
 ^^^^^^^^^
 
