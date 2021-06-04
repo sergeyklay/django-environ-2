@@ -13,7 +13,7 @@ from urllib.parse import quote
 import pytest
 
 from environ import Env, Path
-from environ.compat import ImproperlyConfigured, DJANGO_POSTGRES
+from environ.compat import DJANGO_POSTGRES, ImproperlyConfigured
 from .asserts import assert_type_and_value
 from .fixtures import FakeEnv
 
@@ -26,7 +26,7 @@ class TestEnv:
         Setup any state tied to the execution of the given method in a
         class.  setup_method is invoked for every test method of a class.
         """
-        os.environ = Env.ENVIRON = FakeEnv.generateData()
+        os.environ = Env.ENVIRON = FakeEnv.generate_data()
         self.env = Env()
 
     def test_not_present_with_default(self):
@@ -286,7 +286,7 @@ class TestSubClass(TestEnv):
         """
         super().setup_method(method)
 
-        self.CONFIG = FakeEnv.generateData()
+        self.CONFIG = FakeEnv.generate_data()
 
         class MyEnv(Env):
             ENVIRON = self.CONFIG
