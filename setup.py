@@ -6,6 +6,8 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
+"""Setup module for django-environ-2."""
+
 import codecs
 import re
 from os import path
@@ -29,7 +31,7 @@ def load_long_description():
     """Load long description from file README.rst."""
     def changes():
         changelog = path.join(PKG_DIR, 'CHANGELOG.rst')
-        pat = r"(\d+.\d.\d \(.*?\)\r?\n.*?)\r?\n\r?\n\r?\n----\r?\n\r?\n\r?\n"
+        pat = r'(\d+.\d+.\d+ \(.*?\)\r?\n.*?)\r?\n\r?\n\r?\n----\r?\n\r?\n\r?\n'
         result = re.search(pat, read_file(changelog), re.S)
 
         return result.group(1) if result else ''
