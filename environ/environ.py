@@ -728,7 +728,7 @@ class Env:
         return config
 
     @classmethod
-    def read_env(cls, env_file=None, overwrite=False, encoding=None, **overrides):
+    def read_env(cls, env_file=None, overwrite=False, encoding=None, **kwargs):
         """Read a .env file into ENVIRON.
 
         By default, existing environment variables take precedent and are not
@@ -747,7 +747,7 @@ class Env:
         :param encoding: The name of the encoding used to decode or encode the
             file. If is not specified the encoding used is platform
             dependent.
-        :param **overrides: Any additional keyword arguments provided directly
+        :param **kwargs: Any additional keyword arguments provided directly
             to read_env will be added to the environment.  If the key matches
             an existing environment variable, the value will be overridden.
         """
@@ -765,7 +765,7 @@ class Env:
 
         try:
             if isinstance(env_file, (str, Path, PosixPath, WindowsPath)):
-                with open(env_file.__str__()) as f:
+                with open(env_file.__str__(), encoding=encoding) as f:
                     content = f.read()
             else:
                 with env_file as f:
@@ -792,7 +792,7 @@ class Env:
                 setenv(key, val)
 
         # set overrides
-        for key, value in overrides.items():
+        for key, value in kwargs.items():
             cls.ENVIRON[key] = value
 
 
@@ -822,7 +822,7 @@ class Path:
 
     @property
     def root(self):
-        """Current directory for this Path"""
+        """Current directory for this Path."""
         return self.__root__
 
     def __init__(self, start='', *paths, **kwargs):
@@ -835,7 +835,7 @@ class Path:
         self.__root__ = self._absolute_join(start, *paths, **kwargs)
 
     def __call__(self, *paths, **kwargs):
-        """Retrieve the absolute path, with appended paths
+        """Retrieve the absolute path, with appended paths.
 
         :param paths: List of sub path of self.root
         :param kwargs: required=False
