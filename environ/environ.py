@@ -744,7 +744,7 @@ class Env:
             message that no `.env` file was found and continue on.
         :param overwrite: Whether to override the system environment variables
             with the variables in `.env` file.  Defaults to `False`.
-        :param encoding: The name of the encoding used to decode or encode the
+        :param encoding: The name of the encoding used to read and decode the
             file. If is not specified the encoding used is platform
             dependent.
         :param **kwargs: Any additional keyword arguments provided directly

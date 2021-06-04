@@ -142,6 +142,34 @@ existing environment variables. This is illustrated by the following example:
    assert os.environ['DB_USER'] == 'dev_user'
 
 
+Finally, you can specify the name of the encoding used to read and decode the
+``.env`` file. If is not specified the encoding used is platform dependent:
+
+**.env file**:
+
+.. code-block:: shell
+
+   # .env file contents
+
+   # Whèthér to uŝe a sêcurë cookiè for thé şeśsion cookiê
+   SESSION_COOKIE_SECURE=True
+
+
+**settings.py file**:
+
+.. code-block:: python
+
+   # settings.py file contents
+   import environ
+
+   env = environ.Env()
+
+   # Read .env file using UTF-8 encoding.
+   env.read_env('/path/to/.env', encoding='utf-8')
+
+   assert env.bool('SESSION_COOKIE_SECURE') is True
+
+
 Interpolate Environment Variables
 =================================
 
