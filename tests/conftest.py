@@ -73,3 +73,13 @@ def env_file():
 def simple_env_file():
     """Return simple_env.txt file path for the testing purposes."""
     return os.path.join(os.path.dirname(__file__), 'simple_env.txt')
+
+
+@pytest.fixture
+def unicode_env_file():
+    """Return unicode.txt file path for the testing purposes."""
+    return os.path.join(
+        os.path.dirname(__file__),
+        'fixtures',
+        'unicode.txt',
+    )
