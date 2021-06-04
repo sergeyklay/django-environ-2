@@ -89,6 +89,7 @@ jobs:
       # Use a modern Python version for combining coverage
       - name: Set up Python 3.10
         uses: actions/setup-python@v2.2.2
+        if: ${{ matrix.python != '3.10.0-beta - 3.10' }}
         with:
           python-version: '3.10.0-beta - 3.10'
 

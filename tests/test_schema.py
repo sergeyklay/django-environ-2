@@ -19,7 +19,7 @@ def setup_module():
     global _old_environ
 
     _old_environ = os.environ
-    os.environ = Env.ENVIRON = FakeEnv.generateData()
+    os.environ = Env.ENVIRON = FakeEnv.generate_data()
 
 
 def teardown_module():
@@ -31,8 +31,13 @@ def teardown_module():
 
 
 def test_schema():
-    env = Env(INT_VAR=int, NOT_PRESENT_VAR=(float, 33.3), STR_VAR=str,
-              INT_LIST=[int], DEFAULT_LIST=([int], [2]))
+    env = Env(
+        INT_VAR=int,
+        NOT_PRESENT_VAR=(float, 33.3),
+        STR_VAR=str,
+        INT_LIST=[int],
+        DEFAULT_LIST=([int], [2])
+    )
 
     assert isinstance(env('INT_VAR'), int)
     assert env('INT_VAR') == 42

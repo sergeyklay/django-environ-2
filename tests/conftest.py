@@ -66,10 +66,28 @@ def search_url(request):
 @pytest.fixture
 def env_file():
     """Return test_env.txt file path for the testing purposes."""
-    return os.path.join(os.path.dirname(__file__), 'test_env.txt')
+    return os.path.join(
+        os.path.dirname(__file__),
+        'fixtures',
+        'test_env.txt',
+    )
 
 
 @pytest.fixture
 def simple_env_file():
     """Return simple_env.txt file path for the testing purposes."""
-    return os.path.join(os.path.dirname(__file__), 'simple_env.txt')
+    return os.path.join(
+        os.path.dirname(__file__),
+        'fixtures',
+        'simple_env.txt',
+    )
+
+
+@pytest.fixture
+def unicode_env_file():
+    """Return unicode.txt file path for the testing purposes."""
+    return os.path.join(
+        os.path.dirname(__file__),
+        'fixtures',
+        'unicode.txt',
+    )

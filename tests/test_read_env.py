@@ -53,10 +53,10 @@ def test_read_env_override_os(env_file, monkeypatch):
 @pytest.mark.parametrize(
     'file_path',
     [
-        os.path.join(os.path.dirname(__file__), 'test_env.txt'),
-        Path(os.path.join(os.path.dirname(__file__), 'test_env.txt')),
-        pathlib.Path(__file__).parent.joinpath('test_env.txt'),
-        pathlib.Path(__file__).parent / 'test_env.txt'
+        os.path.join(os.path.dirname(__file__), 'fixtures', 'test_env.txt'),
+        Path(os.path.join(os.path.dirname(__file__), 'fixtures', 'test_env.txt')),
+        pathlib.Path(__file__).parent.joinpath('fixtures', 'test_env.txt'),
+        pathlib.Path(__file__).parent / 'fixtures' / 'test_env.txt'
     ],
 )
 def test_read_env(file_path, caplog):
@@ -86,7 +86,7 @@ def test_read_env_no_file(caplog):
 
 
 def test_read_env_using_base_path(simple_env_file, monkeypatch):
-    """Make sure we able read .env file using 'django.settings.BASE_DIR'."""
+    """Read .env file using 'django.settings.BASE_DIR'."""
     from django.conf import settings
 
     settings.configure()
@@ -101,7 +101,7 @@ def test_read_env_using_base_path(simple_env_file, monkeypatch):
 
 
 def test_read_and_overwrite_env(simple_env_file, monkeypatch):
-    """Make sure we able overwrite existing environment variables."""
+    """Overwrite existing environment variables."""
     monkeypatch.setenv('DB_NAME', 'user')
     monkeypatch.setenv('DB_USER', 'password')
 
@@ -111,3 +111,12 @@ def test_read_and_overwrite_env(simple_env_file, monkeypatch):
 
     assert os.environ['DB_NAME'] == 'dev_db'
     assert os.environ['DB_USER'] == 'dev_user'
+
+
+def test_read_env_using_encoding(unicode_env_file):
+    """Read a file with Unicode-encoded comments."""
+    env = Env()
+    env.read_env(env_file=unicode_env_file, encoding='utf-8')
+
+    assert os.environ['SESSION_COOKIE_SECURE'] == 'True'
+    assert env('SESSION_COOKIE_SECURE', cast=bool) is True
