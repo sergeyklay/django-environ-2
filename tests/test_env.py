@@ -271,7 +271,9 @@ class TestFileEnv(TestEnv):
         super().setup_method(method)
 
         Env.ENVIRON = {}
-        self.env.read_env(Path(__file__, is_file=True)('test_env.txt'))
+
+        path = Path(__file__, is_file=True)
+        self.env.read_env(path('fixtures', 'test_env.txt'))
 
 
 class TestSubClass(TestEnv):

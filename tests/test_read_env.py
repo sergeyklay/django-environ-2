@@ -53,10 +53,10 @@ def test_read_env_override_os(env_file, monkeypatch):
 @pytest.mark.parametrize(
     'file_path',
     [
-        os.path.join(os.path.dirname(__file__), 'test_env.txt'),
-        Path(os.path.join(os.path.dirname(__file__), 'test_env.txt')),
-        pathlib.Path(__file__).parent.joinpath('test_env.txt'),
-        pathlib.Path(__file__).parent / 'test_env.txt'
+        os.path.join(os.path.dirname(__file__), 'fixtures', 'test_env.txt'),
+        Path(os.path.join(os.path.dirname(__file__), 'fixtures', 'test_env.txt')),
+        pathlib.Path(__file__).parent.joinpath('fixtures', 'test_env.txt'),
+        pathlib.Path(__file__).parent / 'fixtures' / 'test_env.txt'
     ],
 )
 def test_read_env(file_path, caplog):
