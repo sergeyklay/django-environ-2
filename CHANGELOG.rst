@@ -11,7 +11,7 @@ releases, in reverse chronological order.
 Improvements
 ^^^^^^^^^^^^
 
-* Provided ability to read `.env` file contents using custom encoding.
+* Provided ability to read ``.env`` file contents using custom encoding.
 
 
 Bug Fixes
