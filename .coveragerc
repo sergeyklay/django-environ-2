@@ -6,15 +6,23 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
----
-version: 2
-python:
-  # Keep version in sync with tox.ini (testenv:docs) and
-  # docs.yml (GitHub Action Workflow).
-  version: '3.8'
+[report]
+precision = 2
+show_missing = True
 
-  install:
-    - method: pip
-      path: .
-      extra_requirements:
-        - docs
+[html]
+directory = htmlcov
+
+[xml]
+output = coverage.xml
+
+[run]
+branch = True
+parallel = True
+data_file = coverage.db
+# A list of file name patterns, the files to leave
+# out of measurement or reporting.
+omit =
+    tests/*
+    .venv/*
+    */__pycache__/*

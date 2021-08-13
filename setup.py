@@ -160,8 +160,13 @@ DEPENDENCY_LINKS = []
 EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
     'testing': [
-        'coverage[toml]>=5.0.2',  # Code coverage measurement for Python
-        'pytest>=6.2.0',  # Our test framework
+        'coverage[toml]>=5.4',  # Code coverage measurement for Python
+        'pytest>=6.2.4',  # Our test framework
+        'pylint>=2.6.0,!=2.6.1',  # Python code static checker
+        'flake8>=3.8.4',  # The modular source code checker
+        'flake8-import-order>=0.18.1',  # Checks the ordering of imports
+        'flake8-blind-except>=0.2.0',  # Checks for blind except: statements
+        'check-manifest>=0.45',  # Check MANIFEST.in
     ],
     # Dependencies that are required to build documentation
     'docs': [
@@ -172,7 +177,16 @@ EXTRAS_REQUIRE = {
 }
 
 # Dependencies that are required to develop package
-EXTRAS_REQUIRE['develop'] = EXTRAS_REQUIRE['testing'] + EXTRAS_REQUIRE['docs']
+DEVELOP_REQUIRE = [
+    'twine>=3.3.0',  # Publishing packages on PyPI
+    'setuptools>=53.0.0',  # Build and install packages
+    'wheel>=0.36.2',  # A built-package format for Python
+    'check-wheel-contents>=0.2.0',  # Check wheels have the right contents
+]
+
+# Dependencies that are required to develop package
+EXTRAS_REQUIRE['develop'] = \
+    DEVELOP_REQUIRE + EXTRAS_REQUIRE['testing'] + EXTRAS_REQUIRE['docs']
 
 # Project's URLs
 PROJECT_URLS = {

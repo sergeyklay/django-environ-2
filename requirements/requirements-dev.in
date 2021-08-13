@@ -6,15 +6,22 @@
 # For the full copyright and license information, please view
 # the LICENSE file that was distributed with this source code.
 
----
-version: 2
-python:
-  # Keep version in sync with tox.ini (testenv:docs) and
-  # docs.yml (GitHub Action Workflow).
-  version: '3.8'
+# testing
+django
+coverage[toml]
+pylint>=2.6.0,!=2.6.1
+pytest
+flake8
+flake8-import-order
+flake8-blind-except
+check-manifest
 
-  install:
-    - method: pip
-      path: .
-      extra_requirements:
-        - docs
+# docs
+furo
+sphinx
+sphinx-notfound-page
+
+# develop
+twine
+wheel
+check-wheel-contents
