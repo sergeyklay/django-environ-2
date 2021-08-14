@@ -42,4 +42,4 @@ jobs:
 
       - name: Code linting
         # TODO: run: make lint
-        run: flake8 environ
+        run: .venv/bin/flake8 ./environ
