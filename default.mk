@@ -33,11 +33,13 @@ VENV_ROOT = .venv
 
 # PYTHON will used to create venv
 ifeq ($(OS),Windows_NT)
-	PYTHON  ?= python.exe
-	VENV_BIN = $(VENV_ROOT)/Scripts
+	PYTHON     ?= python.exe
+	VIRTUALENV ?= virtualenv.exe
+	VENV_BIN    = $(VENV_ROOT)/Scripts
 else
-	PYTHON  ?= python3
-	VENV_BIN = $(VENV_ROOT)/bin
+	PYTHON     ?= python3
+	VIRTUALENV ?= $(PYTHON) -m venv
+	VENV_BIN    = $(VENV_ROOT)/bin
 endif
 
 VENV_PYTHON = $(VENV_BIN)/python
