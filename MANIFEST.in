@@ -19,11 +19,16 @@ graft .github
 recursive-include tests *.py
 recursive-include tests *.txt
 recursive-include tests .env
-include tox.ini
 
 # All files in the sdist with a .pyc, .pyo, or .pyd extension will be removed
 # from the sdist.
 global-exclude *.py[cod]
+
+# Exclude stuff for local development
+exclude .coveragerc .pylintrc Makefile default.mk requirements/*.in
+
+# Include requirements.txt for reproducible tests
+include requirements/*.txt
 
 # Documentation
 include docs/docutils.conf docs/Makefile

@@ -14,7 +14,8 @@
 # https://help.github.com/articles/ignoring-files/#create-a-global-gitignore
 
 # Directories to ignore (do not add trailing '/'s, they skip symlinks).
-/.tox
+/.pytest_cache
+/.venv
 /build
 /dist
 /*.egg-info
@@ -26,5 +27,4 @@
 __pycache__
 
 # Ignore codecoverage stuff.
-.coverage*
-coverage.xml
+coverage.*

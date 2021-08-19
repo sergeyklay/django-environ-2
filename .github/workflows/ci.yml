@@ -29,7 +29,6 @@ on:
       #      | |____ hour (0 - 23)
       #      |____ minute (0 - 59)
 
-
 env:
   PYTHONUNBUFFERED: '1'
 
@@ -72,10 +71,20 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
-      - name: Install dependencies
+      - name: Makefile selftest
+        run: make help
+
+      - name: Install virtualenv
+        if: matrix.os == 'windows-latest'
         run: |
           python -m pip install --upgrade pip
-          pip --use-feature=in-tree-build install tox tox-gh-actions
+          python -m pip install virtualenv
+
+      - name: Set up virtualenv
+        run: make init
+
+      - name: Install dependencies
+        run: make install
 
       - name: Setuptools self-test
         run: |
@@ -84,24 +93,18 @@ jobs:
           python setup.py --classifiers
 
       - name: Run unit tests with coverage
-        run: tox
-
-      # Use a modern Python version for combining coverage
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v2.2.2
-        if: ${{ matrix.python != '3.10.0-beta - 3.10' }}
-        with:
-          python-version: '3.10.0-beta - 3.10'
+        run: make test
 
       - name: Combine coverage reports
-        run: tox -e coverage-report
+        run: make ccov
 
       - name: Upload coverage report
         if: success()
         env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_SERVICE_NAME: github
         run: |
-          pip --use-feature=in-tree-build install coveralls
+          python -m pip --use-feature=in-tree-build install coveralls
           coveralls
 
       - name: Success Reporting

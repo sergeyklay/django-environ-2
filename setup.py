@@ -31,7 +31,7 @@ def load_long_description():
     """Load long description from file README.rst."""
     def changes():
         changelog = path.join(PKG_DIR, 'CHANGELOG.rst')
-        pat = r'(\d+.\d+.\d+ \(.*?\)\r?\n.*?)\r?\n\r?\n\r?\n----\r?\n\r?\n\r?\n'
+        pat = r'(\d+.\d+.\d+ \(.*?\)\r?\n.*?)\r?\n\r?\n\r?\n----\r?\n\r?\n\r?\n'  # noqa: E501
         result = re.search(pat, read_file(changelog), re.S)
 
         return result.group(1) if result else ''
@@ -54,7 +54,7 @@ def load_long_description():
             '===================\n',
             changes(),
             '',
-            f"`Full changelog <{find_meta('url')}/en/latest/changelog.html>`_.",
+            f"`Full changelog <{find_meta('url')}/en/latest/changelog.html>`_.",  # noqa: E501
             '',
             read_file(path.join(PKG_DIR, 'SECURITY.rst')),
             '',
@@ -155,24 +155,38 @@ DEPENDENCY_LINKS = []
 # List additional groups of dependencies here (e.g. testing dependencies).
 # You can install these using the following syntax, for example:
 #
-#    $ pip install -e .[develop,testing,docs]
+#    $ pip install -e .[testing,docs,develop]
 #
 EXTRAS_REQUIRE = {
     # Dependencies that are required to run tests
     'testing': [
-        'coverage[toml]>=5.0.2',  # Code coverage measurement for Python
-        'pytest>=6.2.0',  # Our test framework
+        'coverage[toml]>=5.4',  # Code coverage measurement for Python
+        'pytest>=6.2.4',  # Our tests framework
+        'pylint>=2.6.0,!=2.6.1',  # Python code static checker
+        'flake8>=3.8.4',  # The modular source code checker
+        'flake8-import-order>=0.18.1',  # Checks the ordering of imports
+        'flake8-blind-except>=0.2.0',  # Checks for blind except: statements
+        'check-manifest>=0.45',  # Check MANIFEST.in
     ],
     # Dependencies that are required to build documentation
     'docs': [
-        'furo>=2020.12.30b24,==2020.12.*',  # Sphinx documentation theme
+        'furo>=2021.8.17b43,==2021.8.*',  # Sphinx documentation theme
         'sphinx>=3.5.0',  # Python documentation generator
         'sphinx-notfound-page',  # Create a custom 404 page
     ],
 }
 
 # Dependencies that are required to develop package
-EXTRAS_REQUIRE['develop'] = EXTRAS_REQUIRE['testing'] + EXTRAS_REQUIRE['docs']
+DEVELOP_REQUIRE = [
+    'twine>=3.3.0',  # Publishing packages on PyPI
+    'setuptools>=53.0.0',  # Build and install packages
+    'wheel>=0.36.2',  # A built-package format for Python
+    'check-wheel-contents>=0.2.0',  # Check wheels have the right contents
+]
+
+# Dependencies that are required to develop package
+EXTRAS_REQUIRE['develop'] = \
+    DEVELOP_REQUIRE + EXTRAS_REQUIRE['testing'] + EXTRAS_REQUIRE['docs']
 
 # Project's URLs
 PROJECT_URLS = {
