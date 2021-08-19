@@ -29,7 +29,6 @@ on:
       #      | |____ hour (0 - 23)
       #      |____ minute (0 - 59)
 
-
 env:
   PYTHONUNBUFFERED: '1'
 
@@ -96,10 +95,12 @@ jobs:
       - name: Upload coverage report
         if: success()
         env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COVERALLS_SERVICE_NAME: github
         run: |
           python -m pip --use-feature=in-tree-build install coveralls
           coveralls
+
       - name: Success Reporting
         if: success()
         run: git log --format=fuller -5

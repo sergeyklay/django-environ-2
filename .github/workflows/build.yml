@@ -24,8 +24,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
     name: Build and test package distribution
+    runs-on: ubuntu-20.04
 
     steps:
       - name: Checkout code
@@ -66,7 +66,7 @@ jobs:
           python-version: '3.9'
 
       - name: Install in dev mode
-        run: python -m pip install -e .[develop]
+        run: python -m pip install -e .
 
       - name: Import package
         run: python -c 'import environ; print(environ.__version__)'
