@@ -34,7 +34,7 @@ endef
 # '--generate-hashes' is disabled until we support Python 3.7
 # and depend on 'typing_extensions'
 requirements/%.txt: requirements/%.in $(VENV_BIN)
-	$(VENV_BIN)/pip-compile --output-file=$@ $<
+	$(VENV_BIN)/pip-compile --allow-unsafe --output-file=$@ $<
 
 ## Public targets
 
@@ -65,7 +65,7 @@ init: $(VENV_PYTHON)
 install: $(REQUIREMENTS)
 	@echo $(CS)Installing $(PKG_NAME) and all its dependencies$(CE)
 	$(VENV_BIN)/pip-sync $(REQUIREMENTS)
-	$(VENV_PIP) install --upgrade --editable .[develop]
+	$(VENV_PIP) install --upgrade --editable .
 	@echo
 
 .PHONY: uninstall
@@ -94,7 +94,6 @@ maintainer-clean: clean
 	@echo $(CS)Performing full clean$(CE)
 	$(RM) -r $(VENV_ROOT)
 	$(call rm-venv-link)
-	$(RM) -r $(WORKON_HOME)/$(PKG_NAME)
 	$(RM) $(REQUIREMENTS)
 	@echo
 
@@ -102,7 +101,8 @@ maintainer-clean: clean
 lint: $(VENV_PYTHON)
 	@echo $(CS)Running linters$(CE)
 	-$(VENV_BIN)/flake8 $(FLAKE8_FLAGS) ./
-	$(VENV_BIN)/pylint ./environ
+	$(VENV_BIN)/pylint $(PYLINT_FLAGS) ./environ
+	@echo
 
 .PHONY: test
 test: $(VENV_PYTHON)
@@ -112,7 +112,7 @@ test: $(VENV_PYTHON)
 	@echo
 
 .PHONY: ccov
-ccov:
+ccov: $(VENV_PYTHON)
 	@echo $(CS)Combine coverage reports$(CE)
 	$(VENV_BIN)/coverage combine
 	$(VENV_BIN)/coverage report
@@ -127,7 +127,7 @@ manifest:
 	@echo
 
 .PHONY: docs
-docs:
+docs: $(VENV_PYTHON)
 	@echo $(CS)Build package documentation$(CE)
 	$(VENV_BIN)/sphinx-build -n -T -W -b html -d ./doctrees docs docs/_build/html
 	$(VENV_BIN)/sphinx-build -n -T -W -b doctest -d ./doctrees docs docs/_build/html
@@ -156,6 +156,7 @@ test-dist: test-sdist test-wheel
 sdist:
 	@echo $(CS)Creating source distribution$(CE)
 	$(VENV_PYTHON) setup.py sdist
+	@echo
 
 .PHONY: test-sdist
 test-sdist: $(VENV_PYTHON) sdist
@@ -189,6 +190,7 @@ upload: $(VENV_PYTHON)
 	$(MAKE) build
 	$(MAKE) check-dist
 	$(VENV_BIN)/twine upload ./dist/*
+	@echo
 
 .PHONY: help
 help:
@@ -232,6 +234,7 @@ help:
 	@echo
 	@echo '  FLAKE8_FLAGS: $(FLAKE8_FLAGS)'
 	@echo '  PYTEST_FLAGS: $(PYTEST_FLAGS)'
+	@echo '  PYLINT_FLAGS: $(PYLINT_FLAGS)'
 	@echo
 	@echo 'Environment variables:'
 	@echo
