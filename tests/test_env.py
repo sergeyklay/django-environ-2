@@ -70,41 +70,53 @@ class TestEnv:
         assert_type_and_value(float, 33.3, self.env('FLOAT_VAR', cast=float))
         assert_type_and_value(float, 33.3, self.env.float('FLOAT_VAR'))
 
-        assert_type_and_value(float, 33.3, self.env('FLOAT_COMMA_VAR', cast=float))
-        assert_type_and_value(float, 123420333.3, self.env('FLOAT_STRANGE_VAR1', cast=float))
-        assert_type_and_value(float, 123420333.3, self.env('FLOAT_STRANGE_VAR2', cast=float))
-        assert_type_and_value(float, -1.0, self.env('FLOAT_NEGATIVE_VAR1', cast=float))
-        assert_type_and_value(float, -1.0, self.env('FLOAT_NEGATIVE_VAR2', cast=float))
+        assert_type_and_value(float, 33.3,
+                              self.env('FLOAT_COMMA_VAR', cast=float))
+        assert_type_and_value(float, 123420333.3,
+                              self.env('FLOAT_STRANGE_VAR1', cast=float))
+        assert_type_and_value(float, 123420333.3,
+                              self.env('FLOAT_STRANGE_VAR2', cast=float))
+        assert_type_and_value(float, -1.0,
+                              self.env('FLOAT_NEGATIVE_VAR1', cast=float))
+        assert_type_and_value(float, -1.0,
+                              self.env('FLOAT_NEGATIVE_VAR2', cast=float))
 
     def test_bool_true(self):
         assert_type_and_value(bool, True, self.env('BOOL_TRUE_VAR', cast=bool))
-        assert_type_and_value(bool, True, self.env('BOOL_TRUE_VAR2', cast=bool))
         assert_type_and_value(bool, True, self.env.bool('BOOL_TRUE_VAR'))
+        assert_type_and_value(bool, True,
+                              self.env('BOOL_TRUE_VAR2', cast=bool))
 
     def test_bool_false(self):
-        assert_type_and_value(bool, False, self.env('BOOL_FALSE_VAR', cast=bool))
-        assert_type_and_value(bool, False, self.env('BOOL_FALSE_VAR2', cast=bool))
         assert_type_and_value(bool, False, self.env.bool('BOOL_FALSE_VAR'))
+        assert_type_and_value(bool, False,
+                              self.env('BOOL_FALSE_VAR', cast=bool))
+        assert_type_and_value(bool, False,
+                              self.env('BOOL_FALSE_VAR2', cast=bool))
 
     def test_default_proxied_setting(self):
         assert_type_and_value(str, '$STR_VAR', self.env('PROXIED_VAR'))
-        assert_type_and_value(str, '$STR_VAR', self.env('XUZ', default='$STR_VAR'))
-        assert_type_and_value(str, "'$STR_VAR'", self.env('XUZ', default="'$STR_VAR'"))
+        assert_type_and_value(str, '$STR_VAR',
+                              self.env('XUZ', default='$STR_VAR'))
+        assert_type_and_value(str, "'$STR_VAR'",
+                              self.env('XUZ', default="'$STR_VAR'"))
 
     def test_enable_proxy_feature(self):
         env = Env(interpolate=True)
         assert_type_and_value(str, 'bar', env('PROXIED_VAR'))
         assert_type_and_value(str, 'bar', env('XUZ', default='$STR_VAR'))
-        assert_type_and_value(str, "'$STR_VAR'", self.env('XUZ', default="'$STR_VAR'"))
+        assert_type_and_value(str, "'$STR_VAR'",
+                              self.env('XUZ', default="'$STR_VAR'"))
 
     def test_int_list(self):
         assert_type_and_value(list, [42, 33], self.env('INT_LIST', cast=[int]))
         assert_type_and_value(list, [42, 33], self.env.list('INT_LIST', int))
 
     def test_int_tuple(self):
-        assert_type_and_value(tuple, (42, 33), self.env('INT_LIST', cast=(int,)))
         assert_type_and_value(tuple, (42, 33), self.env.tuple('INT_LIST', int))
         assert_type_and_value(tuple, ('42', '33'), self.env.tuple('INT_LIST'))
+        assert_type_and_value(tuple, (42, 33),
+                              self.env('INT_LIST', cast=(int,)))
 
     def test_str_list_with_spaces(self):
         assert_type_and_value(list, [' foo', '  bar'],

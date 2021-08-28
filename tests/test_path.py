@@ -7,8 +7,9 @@
 # the LICENSE file that was distributed with this source code.
 
 import os
-import pytest
 import sys
+
+import pytest
 
 from environ import Path
 from environ.compat import ImproperlyConfigured
@@ -57,7 +58,8 @@ def test_comparison():
     assert Path('/home') != Path('/home/dev')
 
     assert Path('/home/foo/').rfind('/') == str(Path('/home/foo')).rfind('/')
-    assert Path('/home/foo/').find('/home') == str(Path('/home/foo/')).find('/home')
+    assert Path('/home/foo/').find('/home') == \
+           str(Path('/home/foo/')).find('/home')
     assert Path('/home/foo/')[1] == str(Path('/home/foo/'))[1]
     assert Path('/home/foo/').__fspath__() == str(Path('/home/foo/'))
     assert ~Path('/home') == Path('/')
