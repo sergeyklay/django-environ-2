@@ -177,12 +177,7 @@ EXTRAS_REQUIRE = {
 }
 
 # Dependencies that are required to develop package
-DEVELOP_REQUIRE = [
-    'twine>=3.3.0',  # Publishing packages on PyPI
-    'setuptools>=53.0.0',  # Build and install packages
-    'wheel>=0.36.2',  # A built-package format for Python
-    'check-wheel-contents>=0.2.0',  # Check wheels have the right contents
-]
+DEVELOP_REQUIRE = []
 
 # Dependencies that are required to develop package
 EXTRAS_REQUIRE['develop'] = \

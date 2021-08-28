@@ -34,7 +34,7 @@ endef
 # '--generate-hashes' is disabled until we support Python 3.7
 # and depend on 'typing_extensions'
 requirements/%.txt: requirements/%.in $(VENV_BIN)
-	$(VENV_BIN)/pip-compile --allow-unsafe --output-file=$@ $<
+	$(VENV_BIN)/pip-compile --output-file=$@ $<
 
 ## Public targets
 
@@ -66,6 +66,7 @@ install: $(REQUIREMENTS)
 	@echo $(CS)Installing $(PKG_NAME) and all its dependencies$(CE)
 	$(VENV_BIN)/pip-sync $(REQUIREMENTS)
 	$(VENV_PIP) install --upgrade --editable .
+	$(VENV_PIP) install --upgrade twine check-wheel-contents
 	@echo
 
 .PHONY: uninstall
