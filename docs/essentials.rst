@@ -235,3 +235,86 @@ leads to an infinite recursion.
 
 Interpolation of environment variables on read is a very risky behavior. Even
 if there's a valid use case for it. That's why it is disabled by default.
+
+Using URL-unsafe characters un URL-like variables
+=================================================
+
+Internally ``django-environ-2`` uses ``urllib`` to parse URL-like schemas.
+In turn, ``urllib`` follows `RFC 3986 <https://datatracker.ietf.org/doc/html/rfc3986>`_
+to parse URIs. Therefore, you should encode all unsafe characters in the
+userinfo part to achieve the expected behavior from ``django-environ-2``.
+
+Consider the following **wrong** example:
+
+**.env file**:
+
+.. code-block:: shell
+
+   # .env file contents
+   DATABASE_URL='postgres://user:#@host:5432/db'
+
+**settings.py file**:
+
+.. code-block:: python
+
+   # settings.py file contents
+   import environ
+
+
+   env = environ.Env()
+   result = env.db('DATABASE_URL')
+
+   assert result['NAME'] == ''
+   assert result['USER'] == ''
+   assert result['PASSWORD'] == ''
+   assert result['HOST'] == 'user'
+   assert result['PORT'] == ''
+   assert result['ENGINE'] == 'django.db.backends.postgresql'
+
+Here, the number sign (``#``) was passed as unencoded, raw value.  However,
+according to `RFC 3986 #2.2 <https://datatracker.ietf.org/doc/html/rfc3986#section-2.2>`_,
+the number sign character must be encoded:
+
+.. code-block::
+
+   URIs include components and subcomponents that are delimited by
+   characters in the "reserved" set.  These characters are called
+   "reserved" because they may (or may not) be defined as delimiters by
+   the generic syntax, by each scheme-specific syntax, or by the
+   implementation-specific syntax of a URI's dereferencing algorithm.
+   If data for a URI component would conflict with a reserved
+   character's purpose as a delimiter, then the conflicting data must be
+   percent-encoded before the URI is formed.
+
+   reserved    = gen-delims / sub-delims
+
+   gen-delims  = ":" / "/" / "?" / "#" / "[" / "]" / "@"
+
+   sub-delims  = "!" / "$" / "&" / "'" / "(" / ")"
+               / "*" / "+" / "," / ";" / "="
+
+Thus, to make this example valid, we have to fix it as follows:
+
+**.env file**:
+
+.. code-block:: shell
+
+   # .env file contents
+   DATABASE_URL='postgres://user:%23@host:5432/db'
+
+**settings.py file**:
+
+.. code-block:: python
+
+   # settings.py file contents
+   import environ
+
+   env = environ.Env()
+   result = env.db('DATABASE_URL')
+
+   assert result['NAME'] == 'db'
+   assert result['USER'] == 'user'
+   assert result['PASSWORD'] == '#'
+   assert result['HOST'] == 'host'
+   assert result['PORT'] == 5432
+   assert result['ENGINE'] == 'django.db.backends.postgresql'

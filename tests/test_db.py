@@ -190,3 +190,22 @@ def test_database_options_parsing():
     assert url['OPTIONS'] == {
         'init_command': 'SET storage_engine=INNODB',
     }
+
+
+def test_db_url_with_number_sign():
+    """Test using the encoded number sign as an userinfo part."""
+    result = Env.db_url_config('postgres://user:#@host:5432/db')
+    assert result['NAME'] == ''
+    assert result['USER'] == ''
+    assert result['PASSWORD'] == ''
+    assert result['HOST'] == 'user'
+    assert result['PORT'] == ''
+    assert result['ENGINE'] == 'django.db.backends.postgresql'
+
+    result = Env.db_url_config('postgres://user:%23@host:5432/db')
+    assert result['NAME'] == 'db'
+    assert result['USER'] == 'user'
+    assert result['PASSWORD'] == '#'
+    assert result['HOST'] == 'host'
+    assert result['PORT'] == 5432
+    assert result['ENGINE'] == 'django.db.backends.postgresql'
