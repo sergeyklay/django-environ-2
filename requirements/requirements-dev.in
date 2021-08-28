@@ -20,8 +20,3 @@ check-manifest
 furo
 sphinx
 sphinx-notfound-page
-
-# develop
-twine
-wheel
-check-wheel-contents
