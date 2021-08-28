@@ -50,13 +50,13 @@ def _cast(value):
         return value
 
 
-def _cast_int(v):
+def _cast_int(val):
     """Return int if possible."""
-    return int(v) if hasattr(v, 'isdigit') and v.isdigit() else v
+    return int(val) if hasattr(val, 'isdigit') and val.isdigit() else val
 
 
-def _cast_urlstr(v):
-    return unquote_plus(v) if isinstance(v, str) else v
+def _cast_urlstr(val):
+    return unquote_plus(val) if isinstance(val, str) else val
 
 
 def _make_setenv(env, overwrite=False):
@@ -323,10 +323,8 @@ class Env:
 
         :returns: Value from environment or default (if set)
         """
-
-        logger.debug("get '{}' casted as '{}' with default '{}'".format(
-            var, cast, default
-        ))
+        logger.debug("get '%s' casted as '%s' with default '%s'",
+                     var, cast, default)
 
         if var in self.scheme:
             var_info = self.scheme[var]
@@ -351,10 +349,10 @@ class Env:
 
         try:
             value = self.ENVIRON[var]
-        except KeyError:
+        except KeyError as exc:
             if default is self.NOTSET:
                 error_msg = "Set the {} environment variable".format(var)
-                raise ImproperlyConfigured(error_msg)
+                raise ImproperlyConfigured(error_msg) from exc
 
             value = default
 
@@ -388,7 +386,8 @@ class Env:
         """
         if cast is None:
             return value
-        elif cast is bool:
+
+        if cast is bool:
             try:
                 value = int(value) != 0
             except ValueError:
@@ -401,7 +400,7 @@ class Env:
         elif isinstance(cast, dict):
             key_cast = cast.get('key', str)
             value_cast = cast.get('value', str)
-            value_cast_by_key = cast.get('cast', dict())
+            value_cast_by_key = cast.get('cast', {})
             value = dict(map(
                 lambda kv: (
                     key_cast(kv[0]),
@@ -501,17 +500,17 @@ class Env:
         if url.scheme == 'oracle':
             # Django oracle/base.py strips port and fails on non-string value
             if not config['PORT']:
-                del(config['PORT'])
+                del config['PORT']
             else:
                 config['PORT'] = str(config['PORT'])
 
         if url.query:
             config_options = {}
-            for k, v in parse_qs(url.query).items():
-                if k.upper() in cls._DB_BASE_OPTIONS:
-                    config.update({k.upper(): _cast(v[0])})
+            for key, val in parse_qs(url.query).items():
+                if key.upper() in cls._DB_BASE_OPTIONS:
+                    config.update({key.upper(): _cast(val[0])})
                 else:
-                    config_options.update({k: _cast_int(v[0])})
+                    config_options.update({key: _cast_int(val[0])})
             config['OPTIONS'] = config_options
 
         if engine:
@@ -539,8 +538,7 @@ class Env:
         if not isinstance(url, cls.URL_CLASS):
             if not url:
                 return {}
-            else:
-                url = urlparse(url)
+            url = urlparse(url)
 
         if url.scheme not in cls.CACHE_SCHEMES:
             raise ImproperlyConfigured('Invalid cache schema {}'.format(
@@ -581,9 +579,9 @@ class Env:
 
         if url.query:
             config_options = {}
-            for k, v in parse_qs(url.query).items():
-                opt = {k.upper(): _cast(v[0])}
-                if k.upper() in cls._CACHE_BASE_OPTIONS:
+            for key, val in parse_qs(url.query).items():
+                opt = {key.upper(): _cast(val[0])}
+                if key.upper() in cls._CACHE_BASE_OPTIONS:
                     config.update(opt)
                 else:
                     config_options.update(opt)
@@ -629,9 +627,9 @@ class Env:
 
         if url.query:
             config_options = {}
-            for k, v in parse_qs(url.query).items():
-                opt = {k.upper(): _cast_int(v[0])}
-                if k.upper() in cls._EMAIL_BASE_OPTIONS:
+            for key, val in parse_qs(url.query).items():
+                opt = {key.upper(): _cast_int(val[0])}
+                if key.upper() in cls._EMAIL_BASE_OPTIONS:
                     config.update(opt)
                 else:
                     config_options.update(opt)
@@ -673,7 +671,8 @@ class Env:
 
         if url.scheme == 'simple':
             return config
-        elif url.scheme in ['solr', 'elasticsearch', 'elasticsearch2']:
+
+        if url.scheme in ['solr', 'elasticsearch', 'elasticsearch2']:
             if 'KWARGS' in params.keys():
                 config['KWARGS'] = params['KWARGS'][0]
 
@@ -758,37 +757,37 @@ class Env:
             except (AttributeError, ImportError, NameError):
                 logger.warning(
                     "%s doesn't exist - if you're not configuring your "
-                    "environment separately, create one." %
+                    "environment separately, create one.",
                     (env_file or 'Environment file')
                 )
                 return
 
         try:
             if isinstance(env_file, (str, Path, PosixPath, WindowsPath)):
-                with open(env_file.__str__(), encoding=encoding) as f:
-                    content = f.read()
+                with open(env_file.__str__(), encoding=encoding) as file:
+                    content = file.read()
             else:
-                with env_file as f:
-                    content = f.read()
+                with env_file as file:
+                    content = file.read()
         except OSError:
             warnings.warn(
                 "Error reading %s - if you're not configuring your "
                 "environment separately, check this." % env_file)
             return
 
-        logger.debug('Read environment variables from: {}'.format(env_file))
+        logger.debug('Read environment variables from: %s', env_file)
         setenv = _make_setenv(cls.ENVIRON, overwrite=overwrite)
 
         for line in content.splitlines():
-            m1 = re.match(r'\A(?:export )?([A-Za-z_0-9]+)=(.*)\Z', line)
-            if m1:
-                key, val = m1.group(1), m1.group(2)
-                m2 = re.match(r"\A'(.*)'\Z", val)
-                if m2:
-                    val = m2.group(1)
-                m3 = re.match(r'\A"(.*)"\Z', val)
-                if m3:
-                    val = re.sub(r'\\(.)', r'\1', m3.group(1))
+            match1 = re.match(r'\A(?:export )?([A-Za-z_0-9]+)=(.*)\Z', line)
+            if match1:
+                key, val = match1.group(1), match1.group(2)
+                match2 = re.match(r"\A'(.*)'\Z", val)
+                if match2:
+                    val = match2.group(1)
+                match3 = re.match(r'\A"(.*)"\Z', val)
+                if match3:
+                    val = re.sub(r'\\(.)', r'\1', match3.group(1))
                 setenv(key, val)
 
         # set overrides
@@ -826,7 +825,6 @@ class Path:
         return self.__root__
 
     def __init__(self, start='', *paths, **kwargs):
-
         super().__init__()
 
         if kwargs.get('is_file', False):
@@ -856,7 +854,8 @@ class Path:
     def __sub__(self, other):
         if isinstance(other, int):
             return self.path('../' * other)
-        elif isinstance(other, str):
+
+        if isinstance(other, str):
             if self.__root__.endswith(other):
                 return Path(self.__root__.rstrip(other))
 

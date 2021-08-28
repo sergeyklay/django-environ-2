@@ -11,16 +11,20 @@ import json
 
 class FakeEnv:
     URL = 'http://www.google.com/'
-    POSTGRES = 'postgres://uf07k1:wegauwhg@ec2-107-21-253-135.compute-1.amazonaws.com:5431/d8r82722'
-    MYSQL = 'mysql://bea6eb0:69772142@us-cdbr-east.cleardb.com/heroku_97681?reconnect=true'
+    POSTGRES = ('postgres://uf07k1:wegauwhg@ec2-107-21-253-135.'
+                'compute-1.amazonaws.com:5431/d8r82722')
+    MYSQL = ('mysql://bea6eb0:69772142@us-cdbr-east.cleardb.com/heroku_97681?'
+             'reconnect=true')
     MYSQLGIS = 'mysqlgis://user:password@127.0.0.1/some_database'
     SQLITE = 'sqlite:////full/path/to/your/database/file.sqlite'
     ORACLE_TNS = 'oracle://user:password@sid/'
     ORACLE = 'oracle://user:password@host:1521/sid'
     CUSTOM_BACKEND = 'custom.backend://user:password@example.com:5430/database'
-    REDSHIFT = 'redshift://user:password@examplecluster.abc123xyz789.us-west-2.redshift.amazonaws.com:5439/dev'
+    REDSHIFT = ('redshift://user:password@examplecluster.abc123xyz789.'
+                'us-west-2.redshift.amazonaws.com:5439/dev')
     MEMCACHE = 'memcache://127.0.0.1:11211'
-    REDIS = 'rediscache://127.0.0.1:6379/1?client_class=django_redis.client.DefaultClient&password=secret'
+    REDIS = ('rediscache://127.0.0.1:6379/1?'
+             'client_class=django_redis.client.DefaultClient&password=secret')
     EMAIL = 'smtps://user@domain.com:password@smtp.example.com:587'
     JSON = dict(one='bar', two=2, three=33.44)
     DICT = dict(foo='bar', test='on')

@@ -25,7 +25,7 @@ from environ import Env
              'EMAIL_USE_TLS': True,
              'EMAIL_FILE_PATH': ''
          }
-        ),
+         ),
         ('smtp+ssl://user@ukr.net:secret@smtp.ukr.net:465',
          'my.email.backend.Class',
          {
@@ -37,7 +37,7 @@ from environ import Env
              'EMAIL_USE_SSL': True,
              'EMAIL_FILE_PATH': ''
          }
-        ),
+         ),
         ('consolemail://user@gmail.com:secret@smtp.gmail.com:587',
          None,
          {
@@ -48,7 +48,7 @@ from environ import Env
              'EMAIL_PORT': 587,
              'EMAIL_FILE_PATH': ''
          }
-        ),
+         ),
     ],
 )
 def test_smtp_parsing(url, backend, expected):

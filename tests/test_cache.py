@@ -9,7 +9,7 @@
 import pytest
 
 from environ import Env
-from environ.compat import REDIS_DRIVER, ImproperlyConfigured
+from environ.compat import ImproperlyConfigured, REDIS_DRIVER
 
 
 def test_base_options_parsing():
@@ -114,10 +114,13 @@ def test_redis_socket_url():
 
 
 def test_options_parsing():
-    url = 'filecache:///var/tmp/django_cache?timeout=60&max_entries=1000&cull_frequency=0'
+    url = ('filecache:///var/tmp/django_cache?timeout=60&max_entries=1000&'
+           'cull_frequency=0')
     url = Env.cache_url_config(url)
 
-    assert url['BACKEND'] == 'django.core.cache.backends.filebased.FileBasedCache'
+    assert url['BACKEND'] == (
+        'django.core.cache.backends.filebased.FileBasedCache'
+    )
     assert url['LOCATION'] == '/var/tmp/django_cache'
     assert url['TIMEOUT'] == 60
     assert url['OPTIONS'] == {
