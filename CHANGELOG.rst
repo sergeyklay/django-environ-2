@@ -8,6 +8,12 @@ releases, in reverse chronological order.
 2.1.1 (2021-XX-XX)
 ------------------
 
+Features
+^^^^^^^^
+
+* Added Elasticsearch5 to search scheme.
+
+
 Improvements
 ^^^^^^^^^^^^
 
