@@ -236,7 +236,7 @@ leads to an infinite recursion.
 Interpolation of environment variables on read is a very risky behavior. Even
 if there's a valid use case for it. That's why it is disabled by default.
 
-Using URL-unsafe characters un URL-like variables
+Using URL-unsafe characters in URL-like variables
 =================================================
 
 Internally ``django-environ-2`` uses ``urllib`` to parse URL-like schemas.
@@ -275,7 +275,7 @@ Here, the number sign (``#``) was passed as unencoded, raw value.  However,
 according to `RFC 3986 #2.2 <https://datatracker.ietf.org/doc/html/rfc3986#section-2.2>`_,
 the number sign character must be encoded:
 
-.. code-block::
+::
 
    URIs include components and subcomponents that are delimited by
    characters in the "reserved" set.  These characters are called

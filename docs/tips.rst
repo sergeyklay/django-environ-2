@@ -83,7 +83,7 @@ Some settings such as Django's ``ADMINS`` make use of nested lists. You can use 
 Multiline value
 ===============
 
-To get multiline value pass ``multiline=True`` to ```str()```.
+To get multiline value pass ``multiline=True`` to ``str()``.
 
 .. note::
 
