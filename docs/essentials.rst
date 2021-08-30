@@ -318,3 +318,5 @@ Thus, to make this example valid, we have to fix it as follows:
    assert result['HOST'] == 'host'
    assert result['PORT'] == 5432
    assert result['ENGINE'] == 'django.db.backends.postgresql'
+
+See https://perishablepress.com/stop-using-unsafe-characters-in-urls/ for reference.
