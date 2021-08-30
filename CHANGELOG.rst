@@ -8,6 +8,14 @@ releases, in reverse chronological order.
 2.2.1 (2021-XX-XX)
 ------------------
 
+Bug Fixes
+^^^^^^^^^
+
+* Fix markup and misspellings in the documentation.
+
+
+----
+
 
 2.2.0 (2021-08-30)
 ------------------
