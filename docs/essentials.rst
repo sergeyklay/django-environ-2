@@ -275,7 +275,7 @@ Here, the number sign (``#``) was passed as unencoded, raw value.  However,
 according to `RFC 3986 #2.2 <https://datatracker.ietf.org/doc/html/rfc3986#section-2.2>`_,
 the number sign character must be encoded:
 
-.. code-block::
+::
 
    URIs include components and subcomponents that are delimited by
    characters in the "reserved" set.  These characters are called
