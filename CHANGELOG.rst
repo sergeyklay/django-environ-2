@@ -25,6 +25,7 @@ Bug Fixes
 
 * Catch ``AttributeError`` when calling ``Env.read_env()`` if there is no
   ``django.conf.settings.BASE_DIR`` variable.
+* Keep newline/tab escapes in quoted strings.
 
 
 Improved Documentation
