@@ -236,7 +236,7 @@ leads to an infinite recursion.
 Interpolation of environment variables on read is a very risky behavior. Even
 if there's a valid use case for it. That's why it is disabled by default.
 
-Using URL-unsafe characters un URL-like variables
+Using URL-unsafe characters in URL-like variables
 =================================================
 
 Internally ``django-environ-2`` uses ``urllib`` to parse URL-like schemas.
