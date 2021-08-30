@@ -198,7 +198,7 @@ class Env:
         """
         value = self.get_value(var, cast=str, default=default)
         if multiline:
-            return value.replace('\\n', '\n')
+            return re.sub(r'(\\r)?\\n', r'\n', value)
         return value
 
     def bytes(self, var, default=NOTSET, encoding='utf8'):
@@ -786,6 +786,13 @@ class Env:
         logger.debug('Read environment variables from: %s', env_file)
         setenv = _make_setenv(cls.ENVIRON, overwrite=overwrite)
 
+        def _keep_escaped_format_characters(match):
+            """Keep escaped newline/tabs in quoted strings."""
+            escaped_char = match.group(1)
+            if escaped_char in 'rnt':
+                return '\\' + escaped_char
+            return escaped_char
+
         for line in content.splitlines():
             match1 = re.match(r'\A(?:export )?([A-Za-z_0-9]+)=(.*)\Z', line)
             if match1:
@@ -795,7 +802,8 @@ class Env:
                     val = match2.group(1)
                 match3 = re.match(r'\A"(.*)"\Z', val)
                 if match3:
-                    val = re.sub(r'\\(.)', r'\1', match3.group(1))
+                    val = re.sub(r'\\(.)', _keep_escaped_format_characters,
+                                 match3.group(1))
                 setenv(key, val)
 
         # set overrides
