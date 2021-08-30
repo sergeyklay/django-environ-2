@@ -13,12 +13,13 @@ import pkgutil
 
 if pkgutil.find_loader('django'):
     from django import VERSION as DJANGO_VERSION
+    # pylint: disable=unused-import
     from django.core.exceptions import ImproperlyConfigured
 else:
     DJANGO_VERSION = None
 
     class ImproperlyConfigured(Exception):
-        pass
+        """Django is somehow improperly configured."""
 
 # back compatibility with django postgresql package
 if DJANGO_VERSION is not None and DJANGO_VERSION < (2, 0):
