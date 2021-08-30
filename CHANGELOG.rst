@@ -5,7 +5,7 @@ This file contains a brief summary of new features and dependency changes or
 releases, in reverse chronological order.
 
 
-2.1.1 (2021-XX-XX)
+2.2.0 (2021-08-30)
 ------------------
 
 Features
