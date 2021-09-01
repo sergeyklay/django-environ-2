@@ -50,6 +50,7 @@ def volume():
     'elasticsearch://127.0.0.1:9200/index',
     'elasticsearch2://127.0.0.1:9200/index',
     'elasticsearch5://127.0.0.1:9200/index',
+    'elasticsearch7://127.0.0.1:9200/index',
     'whoosh:///home/search/whoosh_index',
     'xapian:///home/search/xapian_index',
     'simple:///'
