@@ -159,6 +159,7 @@ class Env:
         'elasticsearch',
         'elasticsearch2',
         'elasticsearch5',
+        'elasticsearch7',
     ]
 
     SEARCH_SCHEMES = {
@@ -168,6 +169,8 @@ class Env:
                           'Elasticsearch2SearchEngine',
         'elasticsearch5': 'haystack.backends.elasticsearch5_backend.'
                           'Elasticsearch5SearchEngine',
+        'elasticsearch7': 'haystack.backends.elasticsearch7_backend.'
+                          'Elasticsearch7SearchEngine',
         'solr': 'haystack.backends.solr_backend.SolrEngine',
         'whoosh': 'haystack.backends.whoosh_backend.WhooshEngine',
         'xapian': 'haystack.backends.xapian_backend.XapianEngine',

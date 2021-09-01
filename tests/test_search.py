@@ -41,6 +41,8 @@ def test_solr_multicore_parsing(solr_url):
          'haystack.backends.elasticsearch2_backend.Elasticsearch2SearchEngine'),  # noqa: E501
         ('elasticsearch5://127.0.0.1:9200/index',
          'haystack.backends.elasticsearch5_backend.Elasticsearch5SearchEngine'),  # noqa: E501
+        ('elasticsearch7://127.0.0.1:9200/index',
+         'haystack.backends.elasticsearch7_backend.Elasticsearch7SearchEngine'),  # noqa: E501
     ],
 )
 def test_elasticsearch_parsing(url, engine):
