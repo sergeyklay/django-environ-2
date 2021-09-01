@@ -26,7 +26,7 @@ check-manifest==0.46
     # via -r requirements/requirements-dev.in
 coverage[toml]==5.5
     # via -r requirements/requirements-dev.in
-django==3.2.6
+django==3.2.7
     # via -r requirements/requirements-dev.in
 docutils==0.17.1
     # via sphinx
