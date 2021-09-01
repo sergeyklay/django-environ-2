@@ -36,7 +36,7 @@ flake8-blind-except==0.2.0
     # via -r requirements/requirements-dev.in
 flake8-import-order==0.18.1
     # via -r requirements/requirements-dev.in
-furo==2021.8.17b43
+furo==2021.8.31
     # via -r requirements/requirements-dev.in
 idna==3.2
     # via requests
