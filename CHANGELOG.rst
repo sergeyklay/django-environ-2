@@ -5,8 +5,15 @@ This file contains a brief summary of new features and dependency changes or
 releases, in reverse chronological order.
 
 
-2.2.1 (2021-XX-XX)
+2.3.0 (2021-XX-XX)
 ------------------
+
+Features
+^^^^^^^^
+
+* **Deprecate package in favour of django-environ.**
+* Add Elasticsearch7 to search scheme.
+
 
 Bug Fixes
 ^^^^^^^^^
