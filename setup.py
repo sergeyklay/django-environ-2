@@ -56,8 +56,6 @@ def load_long_description():
             '',
             f"`Full changelog <{find_meta('url')}/en/latest/changelog.html>`_.",  # noqa: E501
             '',
-            read_file(path.join(PKG_DIR, 'SECURITY.rst')),
-            '',
             read_file(path.join(PKG_DIR, 'AUTHORS.rst')),
         )
 
