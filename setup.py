@@ -148,7 +148,7 @@ CLASSIFIERS = [
 ]
 
 # Dependencies that are downloaded by pip on installation and why.
-INSTALL_REQUIRES = []
+INSTALL_REQUIRES = ['django-environ']
 
 DEPENDENCY_LINKS = []
 

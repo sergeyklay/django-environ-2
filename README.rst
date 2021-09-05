@@ -18,6 +18,12 @@
 
 .. teaser-begin
 
+**Disclaimer:** This package is no longer maintained.
+Please use https://github.com/joke2k/django-environ instead.
+
+----
+
+
 ``django-environ-2`` is the Python package that allows you to use
 `Twelve-factor methodology <http://www.12factor.net/>`_ to configure your
 Django application with environment variables.
